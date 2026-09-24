@@ -1,0 +1,18 @@
+---
+description: Sistema visual Bao — tokens, componentes y páginas
+globs: app/**/*.tsx,app/**/*.css,components/**/*.tsx,tailwind.config.ts
+alwaysApply: false
+---
+
+# Interfaz
+
+- Tokens en `tailwind.config.ts`. Superficies: `surface-paper` / `surface-leather`. Oscuro: `on-dark`.
+- Display = Cormorant (`font-display`, `text-d1`–`d5`). UI = IBM Plex (`font-sans`, `text-label`).
+- Botones: `act act-solid` | `act-outline` | `act-quiet`. Fotos: `Plate` o `ProductTile`, nunca una card.
+- Inventario tipográfico: `Ledger`. Ficha: `SpecList`. Pasos: `CraftSteps`. Antetítulo: `SectionLabel`.
+- Sello único: `Seal`, `Ridge`, `Lozenge`, `Wordmark`, `CornerMarks`. No grecas nuevas.
+- `Reveal` y `Parallax` suaves. Nada de bounce ni scroll hijacking. Respetá reduced-motion.
+- Portada: el orden en `app/page.tsx` es el relato. No conviertas `/` en una grilla de shop.
+- Mobile tiene composición propia (hero: titular primero, foto después). No apilar el desktop.
+- Header móvil: el overlay usa `hidden` o `flex` según esté abierto. No dejes `flex` fijo.
+- Si un componente no encaja, reconstruilo. No le apiles CSS encima.

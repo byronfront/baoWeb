@@ -1,25 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-const cormorant = Cormorant_Garamond({
+/**
+ * Dos voces.
+ * Cormorant Garamond — serif de libro, contraste antiguo. Titulares y relato.
+ * IBM Plex Sans — grotesca arquitectónica. Interfaz, medidas y precios.
+ */
+const display = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-heading",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
-const dmSans = DM_Sans({
+const sans = IBM_Plex_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  weight: ["400", "500"],
 });
 
 export const viewport: Viewport = {
-  themeColor: "#321f18",
+  themeColor: "#1c1410",
   width: "device-width",
   initialScale: 1,
 };
@@ -27,15 +33,23 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tudominio.com"),
   title: {
-    default: "Bao | Artículos de cuero artesanal",
-    template: "%s | Bao Cuero",
+    default: "Bao | Marroquinería de taller, hecha a mano en Medellín",
+    template: "%s | Bao",
   },
   description:
-    "Artesanía en cuero. Carteras, cinturones y accesorios hechos a mano en nuestro taller. Calidad y diseño único.",
-  keywords: ["cuero artesanal", "carteras", "cinturones", "marroquineria", "hecho a mano"],
+    "Carteras, cinturones y accesorios cortados y cosidos a mano en cuero curtido al vegetal. Punto de silla, latón macizo y lotes pequeños. Taller en Medellín, Colombia.",
+  keywords: [
+    "marroquinería artesanal",
+    "cuero curtido al vegetal",
+    "cosido a mano",
+    "carteras de cuero",
+    "cinturones de cuero",
+    "Medellín",
+  ],
   openGraph: {
     type: "website",
-    locale: "es_ES",
+    locale: "es_CO",
+    siteName: "Bao",
   },
   robots: "index, follow",
 };
@@ -46,10 +60,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body className="min-h-screen flex flex-col font-sans">
+    <html lang="es" className={`${display.variable} ${sans.variable}`}>
+      <body className="flex min-h-screen flex-col bg-bone font-sans">
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-gutter focus:top-4 focus:z-[100] focus:bg-espresso focus:px-5 focus:py-3 focus:text-label focus:uppercase focus:text-chalk"
+        >
+          Saltar al contenido
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="contenido" className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

@@ -1,0 +1,34 @@
+---
+description: Guardrails de Bao — no rediseñar, no romper el negocio
+alwaysApply: true
+---
+
+# Bao — cómo trabajar en este sitio
+
+Leé `MANTENIMIENTO.md` antes de tocar código si el cambio no es obvio.
+
+Este sitio es un catálogo editorial de taller, no un ecommerce. Los encargos van por WhatsApp y correo. No hay carrito, checkout, auth, CMS ni API.
+
+## Actitud
+
+- Cambio mínimo que resuelva el pedido. No “aprovechar” para rediseñar.
+- Si el usuario no pidió un restyling, no lo hagas.
+- Conservá rutas, filtros, WhatsApp contextual, fichas, `inStock` y el relato.
+- En duda, no inventés secciones, tokens ni componentes.
+
+## Prohibido
+
+- Cards flotantes, sombras, glassmorphism, gradientes digitales, rounded-full
+- Verde de WhatsApp, blanco puro, negro puro, dorado brillante
+- Blackletter, Inter, Poppins, Playfair, iconos decorativos
+- Banderas, folclore, clichés medievales o “premium” de marketing
+- Hardcodear precios, teléfonos, rutas de foto o copy de marca en un componente
+
+## Dónde se edita
+
+- Catálogo y contacto → `lib/data.ts`
+- Relato, menú, fotos de taller → `lib/content.ts`
+- Tokens → `tailwind.config.ts` (nunca hex sueltos)
+- Ornamento → solo `components/brand/Ornament.tsx`
+
+Copy concreto (“cortado a mano”), nunca “calidad y pasión”.

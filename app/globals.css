@@ -2,26 +2,292 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   Bao — capa base
+   Tokens en tailwind.config.ts. Aquí solo curvas, texturas y trazos.
+   ========================================================================== */
+
 :root {
-  --color-leather-950: #321f18;
-  --color-accent-gold: #c9a227;
-  --color-accent-warm: #d4a574;
+  --ease-craft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-material: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --t-fast: 250ms;
+  --t-base: 420ms;
+  --t-slow: 700ms;
+  --t-reveal: 1100ms;
+
+  --seam: theme(colors.espresso / 14%);
+  --seam-strong: theme(colors.espresso / 28%);
+  --seam-invert: theme(colors.chalk.DEFAULT / 16%);
+  --seam-invert-strong: theme(colors.chalk.DEFAULT / 32%);
+
+  /* Grano de papel. Se descubre al mirar, no al leer. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
+
   body {
-    @apply antialiased text-leather-950 bg-leather-50;
+    @apply bg-bone font-sans text-base text-ink antialiased;
+    font-feature-settings: "kern", "liga";
+  }
+
+  .font-display {
+    font-feature-settings: "kern", "liga", "dlig", "onum";
+  }
+
+  ::selection {
+    @apply bg-cognac/30 text-espresso;
+  }
+
+  :focus-visible {
+    outline: 1px solid theme(colors.brass);
+    outline-offset: 3px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: theme(colors.sand);
+  }
+
+  img {
+    -webkit-user-drag: none;
   }
 }
 
 @layer components {
-  .container-tight {
-    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  .shell {
+    @apply mx-auto w-full max-w-page px-gutter;
   }
-  .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2;
+
+  .shell-wide {
+    @apply mx-auto w-full max-w-wide px-gutter;
+  }
+
+  .label {
+    @apply font-sans text-label uppercase;
+  }
+
+  /* Papel: fibra seca + un velo de luz lateral. */
+  .surface-paper {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .surface-paper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--grain),
+      linear-gradient(
+        105deg,
+        theme(colors.parchment / 28%) 0%,
+        transparent 46%,
+        theme(colors.ivory / 0%) 100%
+      );
+    background-size: 220px 220px, auto;
+    opacity: 0.7;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  /* Cuero: luz que entra por la izquierda. */
+  .surface-leather {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .surface-leather::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(
+      102deg,
+      theme(colors.tobacco / 42%) 0%,
+      transparent 40%,
+      theme(colors.pitch / 60%) 100%
+    );
+    pointer-events: none;
+  }
+
+  .surface-leather::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: var(--grain);
+    background-size: 180px 180px;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  .seam-t {
+    border-top: 1px solid var(--seam);
+  }
+  .seam-b {
+    border-bottom: 1px solid var(--seam);
+  }
+  .seam-l {
+    border-left: 1px solid var(--seam);
+  }
+  .seam-r {
+    border-right: 1px solid var(--seam);
+  }
+
+  .on-dark .seam-t,
+  .seam-invert.seam-t {
+    border-top-color: var(--seam-invert);
+  }
+  .on-dark .seam-b,
+  .seam-invert.seam-b {
+    border-bottom-color: var(--seam-invert);
+  }
+  .on-dark .seam-l,
+  .seam-invert.seam-l {
+    border-left-color: var(--seam-invert);
+  }
+  .on-dark .seam-r,
+  .seam-invert.seam-r {
+    border-right-color: var(--seam-invert);
+  }
+
+  .act {
+    @apply relative inline-flex items-center justify-center gap-3
+      border border-transparent px-7 py-3.5 font-sans text-label uppercase
+      transition-colors duration-250 ease-craft;
+  }
+
+  .act-solid {
+    @apply bg-espresso text-chalk hover:bg-tobacco;
+  }
+
+  .on-dark .act-solid {
+    @apply bg-chalk text-espresso hover:bg-sand;
+  }
+
+  .act-outline {
+    @apply border-espresso/30 text-ink hover:border-espresso hover:bg-espresso hover:text-chalk;
+  }
+
+  .on-dark .act-outline {
+    @apply border-chalk/30 text-chalk hover:border-chalk hover:bg-chalk hover:text-espresso;
+  }
+
+  .act-quiet {
+    @apply relative inline-flex items-center gap-2 font-sans text-label uppercase
+      text-ink transition-colors duration-250 ease-craft hover:text-burnt;
+  }
+
+  .on-dark .act-quiet {
+    @apply text-chalk hover:text-sand;
+  }
+
+  .act-quiet::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -0.45em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--t-base) var(--ease-craft);
+  }
+
+  .act-quiet:hover::after,
+  .act-quiet:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Lomo de libro: etiqueta vertical. */
+  .spine {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    @apply font-sans text-label uppercase tracking-[0.28em];
+  }
+
+  .balance {
+    text-wrap: balance;
+  }
+
+  .pretty {
+    text-wrap: pretty;
+  }
+}
+
+@layer utilities {
+  .reveal,
+  .reveal-mask,
+  .reveal-line {
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: transform, opacity, clip-path;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-rise, 1.4rem), 0);
+    transition-property: opacity, transform;
+    transition-duration: var(--t-reveal);
+    transition-timing-function: var(--ease-craft);
+  }
+
+  .reveal-mask {
+    clip-path: inset(0 0 100% 0);
+    transition-property: clip-path;
+    transition-duration: 1500ms;
+    transition-timing-function: var(--ease-material);
+  }
+
+  .reveal-line {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition-property: transform;
+    transition-duration: var(--t-slow);
+    transition-timing-function: var(--ease-material);
+  }
+
+  .is-revealed.reveal,
+  .is-revealed .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .is-revealed.reveal-mask,
+  .is-revealed .reveal-mask {
+    clip-path: inset(0 0 0 0);
+  }
+
+  .is-revealed.reveal-line,
+  .is-revealed .reveal-line {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-mask,
+  .reveal-line {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
   }
 }

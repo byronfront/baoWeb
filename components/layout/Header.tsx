@@ -2,83 +2,185 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
-
-const navLinks = [
-  { href: "/", label: "Inicio" },
-  { href: "/catalogo", label: "Catálogo" },
-  { href: "/contacto", label: "Contacto" },
-];
+import { useEffect, useState } from "react";
+import { contact } from "@/lib/data";
+import { nav } from "@/lib/content";
+import { formatWhatsAppUrl } from "@/lib/format";
+import { Lozenge, Ridge, Seal, Wordmark } from "@/components/brand/Ornament";
 
 export function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const isHome = pathname === "/";
+  const floating = isHome && !scrolled && !menuOpen;
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => setMenuOpen(false), [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+
+    return () => {
+      document.body.style.overflow = previous;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-leather-200/80 bg-leather-50/95 backdrop-blur-sm">
-      <div className="container-tight flex h-16 items-center justify-between">
-        <Link
-          href="/"
-          className="font-heading text-2xl font-semibold text-leather-900 focus-ring rounded"
-          aria-label="Bao - Inicio"
-        >
-          Bao
-        </Link>
-
-        <nav
-          className="hidden md:flex md:items-center md:gap-8"
-          aria-label="Navegación principal"
-        >
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`text-sm font-medium transition-colors focus-ring rounded px-2 py-1 ${
-                pathname === href
-                  ? "text-accent-gold"
-                  : "text-leather-700 hover:text-leather-900"
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-
-        <button
-          type="button"
-          className="md:hidden p-2 text-leather-700 hover:text-leather-900 focus-ring rounded"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="md:hidden border-t border-leather-200 bg-leather-50">
-          <nav
-            className="container-tight flex flex-col gap-1 py-4"
-            aria-label="Menú móvil"
+    <>
+      <header
+        className={[
+          "fixed inset-x-0 top-0 z-50 transition-colors duration-420 ease-craft",
+          floating
+            ? "on-dark border-b border-chalk/10 text-chalk"
+            : "border-b border-espresso/10 bg-bone text-ink",
+          menuOpen ? "on-dark border-transparent bg-transparent text-chalk" : "",
+        ].join(" ")}
+      >
+        <div className="shell flex h-[4.25rem] items-center justify-between md:h-[5.25rem]">
+          <Link
+            href="/"
+            aria-label="Bao — inicio"
+            className="transition-opacity duration-250 hover:opacity-65"
           >
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className={`rounded-lg px-4 py-3 text-sm font-medium focus-ring ${
-                  pathname === href
-                    ? "bg-leather-200/60 text-leather-900"
-                    : "text-leather-700 hover:bg-leather-100"
-                }`}
+            <Wordmark className="text-[0.72rem] md:text-[0.8rem]" />
+          </Link>
+
+          <nav
+            aria-label="Navegación principal"
+            className="hidden items-center gap-11 md:flex"
+          >
+            {nav.map(({ href, label }) => {
+              const active =
+                pathname === href || pathname.startsWith(`${href}/`);
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                  className="group relative py-1 text-label uppercase"
+                >
+                  <span className={active ? "" : "opacity-65 group-hover:opacity-100"}>
+                    {label}
+                  </span>
+                  <span
+                    aria-hidden
+                    className={[
+                      "absolute -bottom-0.5 left-0 h-px w-full origin-left bg-current transition-transform duration-420 ease-craft",
+                      active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                    ].join(" ")}
+                  />
+                </Link>
+              );
+            })}
+
+            {contact.whatsapp && (
+              <a
+                href={formatWhatsAppUrl(
+                  contact.whatsapp,
+                  "Hola, quisiera preguntar por un encargo."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="act-quiet ml-1 opacity-70 hover:opacity-100"
               >
-                {label}
-              </Link>
-            ))}
+                <Lozenge className="h-[5px] w-[5px]" />
+                Escribir
+              </a>
+            )}
           </nav>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="menu-movil"
+            className="-mr-2 px-2 py-2 text-label uppercase md:hidden"
+          >
+            {menuOpen ? "Cerrar" : "Menú"}
+          </button>
         </div>
-      )}
-    </header>
+      </header>
+
+      <MobileMenu open={menuOpen} pathname={pathname} />
+
+      {!isHome && <div aria-hidden className="h-[4.25rem] md:h-[5.25rem]" />}
+    </>
+  );
+}
+
+function MobileMenu({ open, pathname }: { open: boolean; pathname: string }) {
+  return (
+    <div
+      id="menu-movil"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú"
+      hidden={!open}
+      className={[
+        "on-dark surface-leather fixed inset-0 z-40 flex-col bg-espresso text-chalk md:hidden",
+        open ? "flex" : "hidden",
+      ].join(" ")}
+    >
+      <div className="h-[4.25rem] shrink-0" />
+
+      <nav
+        aria-label="Navegación principal"
+        className="shell flex flex-1 flex-col justify-center"
+      >
+        <ul>
+          {nav.map(({ href, label }, i) => {
+            const active = pathname === href || pathname.startsWith(`${href}/`);
+
+            return (
+              <li key={href} className="seam-b seam-invert">
+                <Link
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                  className="flex items-baseline gap-6 py-6"
+                >
+                  <span className="text-label tabular-nums text-chalk-faint">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-display text-d3 font-light">{label}</span>
+                  {active && (
+                    <Lozenge className="h-2 w-2 self-center text-sand" />
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <div className="shell shrink-0 pb-10">
+        <Ridge className="mb-7 text-chalk/20" />
+        <div className="flex items-end justify-between gap-6">
+          <p className="max-w-narrow text-micro text-chalk-muted">
+            Taller en Medellín.
+            <br />
+            Se hace por encargo, en lotes pequeños.
+          </p>
+          <Seal className="h-10 w-10 shrink-0 text-chalk/30" />
+        </div>
+      </div>
+    </div>
   );
 }

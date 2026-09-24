@@ -1,44 +1,102 @@
+import Image from "next/image";
 import Link from "next/link";
+import { hero, photo } from "@/lib/content";
+import { Parallax } from "@/components/motion/Parallax";
+import { Reveal } from "@/components/motion/Reveal";
+import { Ridge } from "@/components/brand/Ornament";
 
+/**
+ * Apertura en folio.
+ *
+ * Escritorio: el texto vive en un panel de cuero; la fotografía ocupa
+ * el resto del viewport, sin degradado encima.
+ * Móvil: primero el titular a pantalla completa; la foto es una lámina
+ * propia, debajo. No es el escritorio apilado.
+ */
 export function Hero() {
   return (
-    <section
-      className="relative overflow-hidden bg-gradient-to-b from-leather-100 to-leather-50 py-20 sm:py-28 lg:py-36"
-      aria-labelledby="hero-heading"
-    >
-      <div className="container-tight relative z-10 text-center">
-        <h1
-          id="hero-heading"
-          className="font-heading text-4xl font-semibold tracking-tight text-leather-900 sm:text-5xl lg:text-6xl"
-        >
-          Cuero artesanal, <span className="text-accent-gold">hecho a mano</span>
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-leather-700 sm:text-xl">
-          Carteras, cinturones y accesorios únicos. Cada pieza sale de nuestro
-          taller con dedicación y oficio.
-        </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/catalogo"
-            className="inline-flex items-center justify-center rounded-lg bg-leather-800 px-6 py-3 text-sm font-medium text-white shadow-md transition-colors hover:bg-leather-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2"
-          >
-            Ver catálogo
-          </Link>
-          <Link
-            href="/contacto"
-            className="inline-flex items-center justify-center rounded-lg border-2 border-leather-700 px-6 py-3 text-sm font-medium text-leather-800 transition-colors hover:bg-leather-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold focus-visible:ring-offset-2"
-          >
-            Contacto
-          </Link>
+    <section className="on-dark bg-espresso text-chalk">
+      <div className="grid md:min-h-[100svh] md:grid-cols-12">
+        <div className="surface-leather relative flex min-h-[100svh] flex-col justify-end px-gutter pb-16 pt-28 md:col-span-5 md:min-h-[100svh] md:justify-between md:pb-16 md:pt-36 lg:col-span-5">
+          <p className="hidden text-label uppercase text-chalk-muted md:block">
+            {hero.kicker}
+          </p>
+
+          <Reveal variant="none" className="md:mt-auto">
+            <p className="text-label uppercase text-chalk-muted md:hidden">
+              {hero.kicker}
+            </p>
+
+            <h1 className="mt-8 font-display text-[clamp(3rem,1.5rem+5vw,6.75rem)] font-light leading-[0.88] tracking-[-0.03em] md:mt-0">
+              {hero.lines.map((line, i) => (
+                <span
+                  key={line}
+                  className={`reveal block ${
+                    i === hero.lines.length - 1 ? "italic text-sand" : ""
+                  }`}
+                  style={
+                    {
+                      "--reveal-delay": `${i * 140}ms`,
+                      paddingLeft: i === 0 ? 0 : `${i * 0.12}em`,
+                    } as React.CSSProperties
+                  }
+                >
+                  {line}
+                </span>
+              ))}
+            </h1>
+
+            <div
+              className="reveal mt-12 max-w-[34ch]"
+              style={{ "--reveal-delay": "420ms" } as React.CSSProperties}
+            >
+              <p className="text-sm leading-relaxed text-chalk-muted pretty">
+                {hero.body}
+              </p>
+            </div>
+
+            <div
+              className="reveal mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+              style={{ "--reveal-delay": "560ms" } as React.CSSProperties}
+            >
+              <Link href="/catalogo" className="act act-solid">
+                Ver las piezas
+              </Link>
+              <Link href="/taller" className="act-quiet">
+                Entrar al taller
+              </Link>
+            </div>
+          </Reveal>
+
+          <div className="mt-16 flex items-end justify-between gap-6 md:mt-20">
+            <p className="text-label tabular-nums text-chalk-faint">
+              {hero.coord}
+            </p>
+            <p className="text-label uppercase text-chalk-faint">{hero.place}</p>
+          </div>
+        </div>
+
+        <div className="relative aspect-[4/5] md:col-span-7 md:aspect-auto md:min-h-[100svh]">
+          <Parallax strength={32}>
+            <Image
+              src={photo.heroWorkshop.src}
+              alt={photo.heroWorkshop.alt}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 58vw"
+              className="object-cover object-[42%_78%]"
+            />
+          </Parallax>
+
+          <p className="spine pointer-events-none absolute bottom-10 right-6 hidden text-chalk/45 md:block">
+            {hero.place} · Taller
+          </p>
         </div>
       </div>
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23321f18' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-        aria-hidden
-      />
+
+      <div className="px-gutter">
+        <Ridge className="text-chalk/15" />
+      </div>
     </section>
   );
 }
