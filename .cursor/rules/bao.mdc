@@ -1,34 +1,35 @@
 ---
-description: Guardrails de Bao — no rediseñar, no romper el negocio
+description: Bao guardrails — do not restyle, do not break the workshop
 alwaysApply: true
 ---
 
-# Bao — cómo trabajar en este sitio
+# Bao — how to work on this site
 
-Leé `MANTENIMIENTO.md` antes de tocar código si el cambio no es obvio.
+Read `MAINTENANCE.md` before changing code if the change is not obvious.
 
-Este sitio es un catálogo editorial de taller, no un ecommerce. Los encargos van por WhatsApp y correo. No hay carrito, checkout, auth, CMS ni API.
+This site is an editorial workshop catalog, not an ecommerce. Commissions go through WhatsApp and email. There is no cart, checkout, auth, CMS or API.
 
-## Actitud
+## Attitude
 
-- Cambio mínimo que resuelva el pedido. No “aprovechar” para rediseñar.
-- Si el usuario no pidió un restyling, no lo hagas.
-- Conservá rutas, filtros, WhatsApp contextual, fichas, `inStock` y el relato.
-- En duda, no inventés secciones, tokens ni componentes.
+- The smallest change that answers the request. Do not “take the chance” to redesign.
+- If the user did not ask for a restyle, do not restyle.
+- Keep routes, filters, contextual WhatsApp, product sheets, `inStock` and the narrative.
+- When in doubt, do not invent sections, tokens or components.
 
-## Prohibido
+## Forbidden
 
-- Cards flotantes, sombras, glassmorphism, gradientes digitales, rounded-full
-- Verde de WhatsApp, blanco puro, negro puro, dorado brillante
-- Blackletter, Inter, Poppins, Playfair, iconos decorativos
-- Banderas, folclore, clichés medievales o “premium” de marketing
-- Hardcodear precios, teléfonos, rutas de foto o copy de marca en un componente
+- Floating cards, shadows, glassmorphism, digital gradients, rounded-full
+- WhatsApp green, pure white, pure black, shiny gold
+- Blackletter, Inter, Poppins, Playfair, decorative icons
+- Flags, folklore, medieval clichés or marketing “premium”
+- Hardcoding prices, phones, photo paths or brand copy inside a component
 
-## Dónde se edita
+## Where to edit
 
-- Catálogo y contacto → `lib/data.ts`
-- Relato, menú, fotos de taller → `lib/content.ts`
-- Tokens → `tailwind.config.ts` (nunca hex sueltos)
-- Ornamento → solo `components/brand/Ornament.tsx`
+- Catalog and contact → `lib/data.ts`
+- Photo paths and note slugs → `lib/content.ts`
+- User-facing copy (ES / EN / RU) → `lib/i18n/es.ts`, `en.ts`, `ru.ts`
+- Tokens → `tailwind.config.ts` (no loose hex)
+- Ornament → only `components/brand/Ornament.tsx`
 
-Copy concreto (“cortado a mano”), nunca “calidad y pasión”.
+Concrete copy (“cut by hand”), never “quality and passion”.

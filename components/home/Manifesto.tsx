@@ -1,13 +1,11 @@
-import { manifesto } from "@/lib/content";
 import { Ridge, Seal } from "@/components/brand/Ornament";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import type { Dictionary } from "@/lib/i18n";
 
-/**
- * El credo. Tres gestos, en el orden en que ocurren.
- * Después del banco, baja el pulso: mucho aire, poco objeto.
- */
-export function Manifesto() {
+export function Manifesto({ dict }: { dict: Dictionary }) {
+  const manifesto = dict.manifesto;
+
   return (
     <section className="surface-paper bg-ivory py-section text-ink">
       <div className="shell">

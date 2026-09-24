@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/types";
+import { catalogHref, getDictionary, type Locale } from "@/lib/i18n";
 import { formatPrice } from "@/lib/format";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -18,6 +19,7 @@ const RATIO = {
 
 type ProductTileProps = {
   product: Product;
+  locale: Locale;
   sizes: string;
   priority?: boolean;
   index?: string;
@@ -28,6 +30,7 @@ type ProductTileProps = {
 
 export function ProductTile({
   product,
+  locale,
   sizes,
   priority = false,
   index,
@@ -35,12 +38,13 @@ export function ProductTile({
   className,
   delay = 0,
 }: ProductTileProps) {
+  const dict = getDictionary(locale);
   const [front, back] = product.images;
   const soldOut = product.inStock === false;
 
   return (
     <Reveal as="article" delay={delay} className={`group ${className ?? ""}`}>
-      <Link href={`/catalogo/${product.slug}`} className="block">
+      <Link href={catalogHref(locale, product.slug)} className="block">
         <div className={`relative overflow-hidden bg-tobacco ${RATIO[ratio]}`}>
           {front ? (
             <>
@@ -77,7 +81,7 @@ export function ProductTile({
 
           {soldOut && (
             <span className="absolute bottom-4 left-4 bg-espresso/90 px-3 py-1.5 text-label uppercase text-chalk">
-              Agotado
+              {dict.ui.soldOut}
             </span>
           )}
         </div>
@@ -87,13 +91,13 @@ export function ProductTile({
             {product.name}
           </h3>
           <p className="text-sm tabular-nums text-ink">
-            {formatPrice(product.price)}
+            {formatPrice(product.price, locale)}
           </p>
           <p className="col-span-2 text-micro uppercase tracking-[0.12em] text-ink-faint">
             {product.type}
           </p>
           <p className="col-span-2 mt-1 text-label uppercase text-ink-muted">
-            Ver detalle
+            {dict.ui.viewDetail}
           </p>
         </div>
       </Link>

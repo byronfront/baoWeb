@@ -1,39 +1,40 @@
 # Bao
 
-Sitio del taller de marroquinería. Catálogo editorial: las piezas se encargan por WhatsApp o correo. No hay carrito ni pagos.
+Workshop leather catalog. Pieces are commissioned by WhatsApp or email. No cart, no payments.
 
 Next.js 14 · TypeScript · Tailwind CSS.
 
-## Arranque
+Locales: Spanish (`/es`), English (`/en`), Russian (`/ru`). Paths are English (`/catalog`, `/workshop`, `/contact`).
+
+## Start
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). Middleware sends `/` to the preferred locale.
 
 ```bash
-npm run build && npm start   # producción
-npm run lint                 # lint
+npm run build && npm start
+npm run lint
 ```
 
-## Mantenimiento
+## Maintenance
 
-La guía completa — añadir piezas, fotos, textos, contacto, diseño y qué no romper — está en:
+**[MAINTENANCE.md](./MAINTENANCE.md)**
 
-**[MANTENIMIENTO.md](./MANTENIMIENTO.md)**
+Daily files:
 
-Para que una IA no rediseñe ni rompa el negocio, el proyecto tiene reglas en `.cursor/rules/` (`bao.mdc`, `catalogo.mdc`, `interfaz.mdc`). Cursor las carga solo. En otro chat, conviene adjuntar o citar `MANTENIMIENTO.md`.
+- `lib/data.ts` — products and contact
+- `lib/content.ts` — photo paths and note slugs
+- `lib/i18n/es.ts`, `en.ts`, `ru.ts` — all user-facing copy
 
-Los dos archivos de uso diario:
+Cursor rules live in `.cursor/rules/`.
 
-- `lib/data.ts` — productos y contacto
-- `lib/content.ts` — relato, menú y fotos del taller
-
-## Dominio
+## Domain
 
 ```env
 # .env.local
-NEXT_PUBLIC_SITE_URL=https://tudominio.com
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 ```

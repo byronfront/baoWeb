@@ -1,10 +1,13 @@
 import Image from "next/image";
-import { patina, photo } from "@/lib/content";
+import { photo } from "@/lib/content";
 import { Reveal } from "@/components/motion/Reveal";
 import { Lozenge } from "@/components/brand/Ornament";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import type { Dictionary } from "@/lib/i18n";
 
-export function Patina() {
+export function Patina({ dict }: { dict: Dictionary }) {
+  const patina = dict.patina;
+
   return (
     <section className="on-dark surface-leather bg-espresso text-chalk">
       <div className="shell py-section pb-12 md:pb-16">
@@ -28,7 +31,7 @@ export function Patina() {
         <div className="reveal-mask relative aspect-[4/3] w-full overflow-hidden sm:aspect-frieze md:aspect-panorama">
           <Image
             src={photo.patina.src}
-            alt={photo.patina.alt}
+            alt={dict.photoAlt.patina}
             fill
             sizes="100vw"
             className="object-cover"

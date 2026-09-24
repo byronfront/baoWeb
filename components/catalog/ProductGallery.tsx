@@ -3,8 +3,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { ProductImage } from "@/types";
+import { fill } from "@/lib/i18n";
 
-export function ProductGallery({ images }: { images: ProductImage[] }) {
+export function ProductGallery({
+  images,
+  viewAria,
+}: {
+  images: ProductImage[];
+  viewAria: string;
+}) {
   const [active, setActive] = useState(0);
   const current = images[active] ?? images[0];
 
@@ -29,7 +36,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
             <li key={image.src}>
               <button
                 type="button"
-                aria-label={`Vista ${i + 1}`}
+                aria-label={fill(viewAria, { n: i + 1 })}
                 aria-current={i === active ? "true" : undefined}
                 onClick={() => setActive(i)}
                 className={`relative aspect-square min-h-11 w-full overflow-hidden bg-tobacco ${

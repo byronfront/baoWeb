@@ -1,19 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { hero, photo } from "@/lib/content";
+import { photo } from "@/lib/content";
+import { catalogHref, workshopHref, type Dictionary, type Locale } from "@/lib/i18n";
 import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 import { Ridge } from "@/components/brand/Ornament";
 
-/**
- * Apertura en folio.
- *
- * Escritorio: el texto vive en un panel de cuero; la fotografía ocupa
- * el resto del viewport, sin degradado encima.
- * Móvil: primero el titular a pantalla completa; la foto es una lámina
- * propia, debajo. No es el escritorio apilado.
- */
-export function Hero() {
+export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const hero = dict.hero;
+
   return (
     <section className="on-dark bg-espresso text-chalk">
       <div className="grid md:min-h-[100svh] md:grid-cols-12">
@@ -59,11 +54,11 @@ export function Hero() {
               className="reveal mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
               style={{ "--reveal-delay": "560ms" } as React.CSSProperties}
             >
-              <Link href="/catalogo" className="act act-solid w-full sm:w-auto">
-                Ver las piezas
+              <Link href={catalogHref(locale)} className="act act-solid w-full sm:w-auto">
+                {dict.ui.viewPieces}
               </Link>
-              <Link href="/taller" className="act-quiet">
-                Entrar al taller
+              <Link href={workshopHref(locale)} className="act-quiet">
+                {dict.ui.enterWorkshop}
               </Link>
             </div>
           </Reveal>
@@ -80,7 +75,7 @@ export function Hero() {
           <Parallax strength={32}>
             <Image
               src={photo.heroWorkshop.src}
-              alt={photo.heroWorkshop.alt}
+              alt={dict.photoAlt.heroWorkshop}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 58vw"
@@ -89,7 +84,7 @@ export function Hero() {
           </Parallax>
 
           <p className="spine pointer-events-none absolute bottom-10 right-6 hidden text-chalk/45 md:block">
-            {hero.place} · Taller
+            {hero.spine}
           </p>
         </div>
       </div>

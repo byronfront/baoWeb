@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { contact } from "@/lib/data";
-import { enquire } from "@/lib/content";
+import { contactHref, fill } from "@/lib/i18n";
 import { formatWhatsAppUrl } from "@/lib/format";
 import { Lozenge } from "@/components/brand/Ornament";
+import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useEnquire } from "./EnquireContext";
 
 const TOAST_KEY = "bao-enquire-toast";
 
 export function EnquireHost() {
+  const { locale, dict } = useLocale();
+  const enquire = dict.enquire;
   const { state, openEnquire, closeEnquire } = useEnquire();
   const [toast, setToast] = useState(false);
 
@@ -45,7 +48,7 @@ export function EnquireHost() {
   };
 
   const message = state.productName
-    ? enquire.product(state.productName)
+    ? fill(enquire.product, { name: state.productName })
     : enquire.general;
 
   return (
@@ -124,7 +127,7 @@ export function EnquireHost() {
               {contact.email && (
                 <li className="seam-b">
                   <a
-                    href={`mailto:${contact.email}?subject=${encodeURIComponent(state.productName ? `Encargo: ${state.productName}` : "Encargo")}&body=${encodeURIComponent(message)}`}
+                    href={`mailto:${contact.email}?subject=${encodeURIComponent(state.productName ? `${enquire.cta}: ${state.productName}` : enquire.cta)}&body=${encodeURIComponent(message)}`}
                     className="group flex items-baseline justify-between gap-4 py-5"
                     onClick={closeEnquire}
                   >
@@ -139,14 +142,14 @@ export function EnquireHost() {
 
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
               <Link
-                href="/contacto#escribir"
+                href={contactHref(locale, "escribir")}
                 className="act-quiet"
                 onClick={closeEnquire}
               >
                 {enquire.modalContact}
               </Link>
               <button type="button" className="text-label uppercase text-ink-faint" onClick={closeEnquire}>
-                Cerrar
+                {dict.nav.close}
               </button>
             </div>
           </div>
@@ -166,6 +169,7 @@ export function EnquireButton({
   children?: React.ReactNode;
 }) {
   const { openEnquire } = useEnquire();
+  const { dict } = useLocale();
 
   return (
     <button
@@ -173,7 +177,7 @@ export function EnquireButton({
       className={className}
       onClick={() => openEnquire(productName)}
     >
-      {children ?? enquire.cta}
+      {children ?? dict.enquire.cta}
     </button>
   );
 }

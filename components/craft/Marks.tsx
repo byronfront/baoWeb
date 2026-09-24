@@ -1,13 +1,20 @@
-import { marks } from "@/lib/content";
 import { Seal } from "@/components/brand/Ornament";
 
-export function Marks({ className }: { className?: string }) {
+export function Marks({
+  items,
+  label,
+  className,
+}: {
+  items: string[];
+  label: string;
+  className?: string;
+}) {
   return (
     <ul
       className={`seam-t grid sm:grid-cols-3 ${className ?? ""}`}
-      aria-label="Características de fabricación"
+      aria-label={label}
     >
-      {marks.map((mark) => (
+      {items.map((mark) => (
         <li
           key={mark}
           className="seam-b flex items-center gap-3.5 py-5 sm:justify-center sm:border-b-0"

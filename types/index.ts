@@ -20,6 +20,7 @@ export type Product = {
   shortDescription: string;
   description: string;
   note?: string;
+  /** Workshop price in RUB. Converted at display. */
   price: number;
   category: ProductCategory;
   images: ProductImage[];

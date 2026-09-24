@@ -8,6 +8,7 @@ export const contact: ContactInfo = {
   instagram: "cuerosbao",
 };
 
+/** `price` is RUB. Display converts to COP / USD / RUB in `formatPrice`. */
 export const products: Product[] = [
   {
     id: "1",
