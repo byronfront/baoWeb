@@ -43,7 +43,9 @@ export const en: Dictionary = {
       "Hide, thread, measurements and the date are confirmed in writing. Then it is cut.",
     modalWhatsApp: "WhatsApp",
     modalEmail: "Email",
-    modalContact: "Other ways to write",
+    modalInstagram: "Instagram",
+    modalContact: "Instagram or a visit",
+    modalVisit: "The workshop receives by appointment. Write before you go.",
     product: "Hello — I am interested in: {name}",
     general: "Hello — I would like to commission a piece.",
     fallback: "Hello — I saw the workshop site and would like to ask about a piece.",
@@ -73,7 +75,7 @@ export const en: Dictionary = {
     catalog: "Catalog",
     pieceNotFound: "Piece not found",
     noteNotFound: "Note not found",
-    otherWays: "Other ways to write",
+    otherWays: "Instagram and a visit",
     writeWays: "Ways to write",
     marks: "How it is made",
     footerLine: "Cut, stitched and burnished by hand",
@@ -276,8 +278,22 @@ export const en: Dictionary = {
     commissionTitle: "A piece to measure",
     commissionLead:
       "Hide, thread colour, measurements and the delivery date are confirmed in writing. Only then is the pattern marked on the skin.",
-    writeTitle: "Email, WhatsApp, a visit",
+    piecesLead: "Ten things cut here. If it is not on the bench, it is made to order.",
+    writeTitle: "WhatsApp, email, Instagram, a visit",
     closing: "Commissions are cut after we have spoken, not before.",
+  },
+
+  commissionPieces: {
+    "cartera-clasica-natural": "Classic bag",
+    "cinturon-vintage-marrón": "One-piece belt",
+    "monedero-minimalista": "Three-fold purse",
+    "riñonera-cuero": "Waist bag",
+    "billetera-dos-cuerpos": "Two-pocket wallet",
+    portadocumentos: "Document sleeve",
+    tarjetero: "Card case",
+    "llavero-una-pieza": "One-piece key fob",
+    "funda-navaja": "Knife sheath",
+    "correa-reloj": "Watch strap",
   },
 
   photoAlt: {

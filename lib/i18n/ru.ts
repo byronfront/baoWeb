@@ -43,7 +43,9 @@ export const ru: Dictionary = {
       "Кожу, нить, мерки и срок подтверждают письменно. Потом кроят.",
     modalWhatsApp: "WhatsApp",
     modalEmail: "Почта",
-    modalContact: "Другие способы написать",
+    modalInstagram: "Instagram",
+    modalContact: "Instagram или визит",
+    modalVisit: "В мастерскую — только по договорённости. Напишите, прежде чем ехать.",
     product: "Здравствуйте. Меня интересует: {name}",
     general: "Здравствуйте. Хочу заказать вещь по мерке.",
     fallback: "Здравствуйте. Видел сайт мастерской и хочу уточнить по вещи.",
@@ -73,7 +75,7 @@ export const ru: Dictionary = {
     catalog: "Каталог",
     pieceNotFound: "Вещь не найдена",
     noteNotFound: "Запись не найдена",
-    otherWays: "Другие способы написать",
+    otherWays: "Instagram и визит",
     writeWays: "Как написать",
     marks: "Как сделано",
     footerLine: "Крой, шов и урез — вручную",
@@ -276,8 +278,22 @@ export const ru: Dictionary = {
     commissionTitle: "Вещь по мерке",
     commissionLead:
       "Кожу, цвет нити, мерки и срок сдачи подтверждают письменно. Только тогда лекала кладут на шкуру.",
-    writeTitle: "Почта, WhatsApp, визит",
+    piecesLead: "Десять вещей, которые кроят здесь. Если нет на верстаке — делают на заказ.",
+    writeTitle: "WhatsApp, почта, Instagram, визит",
     closing: "Заказы кроят после разговора, не раньше.",
+  },
+
+  commissionPieces: {
+    "cartera-clasica-natural": "Классическая сумка",
+    "cinturon-vintage-marrón": "Ремень из одной полосы",
+    "monedero-minimalista": "Портмоне в три сложения",
+    "riñonera-cuero": "Поясная сумка",
+    "billetera-dos-cuerpos": "Бумажник на два отделения",
+    portadocumentos: "Папка для документов",
+    tarjetero: "Картхолдер",
+    "llavero-una-pieza": "Брелок из одной полосы",
+    "funda-navaja": "Чехол для ножа",
+    "correa-reloj": "Ремешок для часов",
   },
 
   photoAlt: {

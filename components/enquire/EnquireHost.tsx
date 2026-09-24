@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { contact } from "@/lib/data";
 import { contactHref, fill } from "@/lib/i18n";
 import { formatWhatsAppUrl } from "@/lib/format";
-import { Lozenge } from "@/components/brand/Ornament";
 import { useLocale } from "@/components/i18n/LocaleProvider";
 import { useEnquire } from "./EnquireContext";
 
@@ -60,7 +59,7 @@ export function EnquireHost() {
         >
           <p className="text-label uppercase text-ink-faint">{enquire.toastTitle}</p>
           <p className="mt-2 text-sm text-ink-muted pretty">{enquire.toastBody}</p>
-          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="mt-4 flex flex-wrap items-center gap-3">
             <button
               type="button"
               className="act act-solid"
@@ -71,7 +70,7 @@ export function EnquireHost() {
             >
               {enquire.cta}
             </button>
-            <button type="button" className="act-quiet" onClick={dismissToast}>
+            <button type="button" className="act act-outline" onClick={dismissToast}>
               {enquire.toastDismiss}
             </button>
           </div>
@@ -82,7 +81,7 @@ export function EnquireHost() {
         <div className="fixed inset-0 z-[70] flex items-end justify-center p-0 sm:items-center sm:p-6">
           <button
             type="button"
-            aria-label="Cerrar"
+            aria-label={dict.nav.close}
             className="absolute inset-0 bg-espresso/55"
             onClick={closeEnquire}
           />
@@ -104,51 +103,51 @@ export function EnquireHost() {
               {enquire.modalLead}
             </p>
 
-            <ul className="mt-8 seam-t">
+            <div className="mt-8 flex flex-col gap-3">
               {contact.whatsapp && (
-                <li className="seam-b">
-                  <a
-                    href={formatWhatsAppUrl(contact.whatsapp, message)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-baseline justify-between gap-4 py-5"
-                    onClick={closeEnquire}
-                  >
-                    <span className="font-display text-d5 font-light">
-                      {enquire.modalWhatsApp}
-                    </span>
-                    <span className="flex items-center gap-2 text-micro uppercase text-ink-faint">
-                      <Lozenge className="h-[4px] w-[4px]" />
-                      {contact.phone ?? contact.whatsapp}
-                    </span>
-                  </a>
-                </li>
+                <a
+                  href={formatWhatsAppUrl(contact.whatsapp, message)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="act act-solid w-full"
+                  onClick={closeEnquire}
+                >
+                  {enquire.modalWhatsApp}
+                </a>
               )}
               {contact.email && (
-                <li className="seam-b">
-                  <a
-                    href={`mailto:${contact.email}?subject=${encodeURIComponent(state.productName ? `${enquire.cta}: ${state.productName}` : enquire.cta)}&body=${encodeURIComponent(message)}`}
-                    className="group flex items-baseline justify-between gap-4 py-5"
-                    onClick={closeEnquire}
-                  >
-                    <span className="font-display text-d5 font-light">
-                      {enquire.modalEmail}
-                    </span>
-                    <span className="text-micro text-ink-faint">{contact.email}</span>
-                  </a>
-                </li>
+                <a
+                  href={`mailto:${contact.email}?subject=${encodeURIComponent(state.productName ? `${enquire.cta}: ${state.productName}` : enquire.cta)}&body=${encodeURIComponent(message)}`}
+                  className="act act-outline w-full"
+                  onClick={closeEnquire}
+                >
+                  {enquire.modalEmail}
+                </a>
               )}
-            </ul>
+              {contact.instagram && (
+                <a
+                  href={`https://instagram.com/${contact.instagram.replace("@", "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="act act-outline w-full"
+                  onClick={closeEnquire}
+                >
+                  {enquire.modalInstagram}
+                </a>
+              )}
+            </div>
 
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+            <p className="mt-6 text-sm text-ink-muted pretty">{enquire.modalVisit}</p>
+
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
               <Link
                 href={contactHref(locale, "escribir")}
-                className="act-quiet"
+                className="act act-outline"
                 onClick={closeEnquire}
               >
                 {enquire.modalContact}
               </Link>
-              <button type="button" className="text-label uppercase text-ink-faint" onClick={closeEnquire}>
+              <button type="button" className="act-quiet" onClick={closeEnquire}>
                 {dict.nav.close}
               </button>
             </div>

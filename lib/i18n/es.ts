@@ -43,7 +43,9 @@ export const es = {
       "Se confirma el cuero, el hilo, las medidas y la fecha por escrito. Después se corta.",
     modalWhatsApp: "WhatsApp",
     modalEmail: "Correo",
-    modalContact: "Otras formas de escribir",
+    modalInstagram: "Instagram",
+    modalContact: "Instagram o una visita",
+    modalVisit: "El taller recibe con cita. Escribí antes de ir.",
     product: "Hola, me interesa: {name}",
     general: "Hola, quisiera encargar una pieza a medida.",
     fallback: "Hola, vi su página y me interesa consultar.",
@@ -73,7 +75,7 @@ export const es = {
     catalog: "Catálogo",
     pieceNotFound: "Pieza no encontrada",
     noteNotFound: "Nota no encontrada",
-    otherWays: "Otras formas de escribir",
+    otherWays: "Instagram y una visita",
     writeWays: "Formas de escribir",
     marks: "Características de fabricación",
     footerLine: "Cortado, cosido y bruñido a mano",
@@ -276,8 +278,22 @@ export const es = {
     commissionTitle: "Una pieza a medida",
     commissionLead:
       "Se confirma el cuero, el color del hilo, las medidas y la fecha de entrega por escrito. Solo entonces se marca el patrón sobre la piel.",
-    writeTitle: "Correo, WhatsApp, visita",
+    piecesLead: "Diez cosas que se cortan aquí. Si no está en el banco, se hace a medida.",
+    writeTitle: "WhatsApp, correo, Instagram, visita",
     closing: "Los encargos se cortan después de hablar, no antes.",
+  },
+
+  commissionPieces: {
+    "cartera-clasica-natural": "Cartera clásica",
+    "cinturon-vintage-marrón": "Cinturón de una pieza",
+    "monedero-minimalista": "Monedero de tres pliegues",
+    "riñonera-cuero": "Riñonera",
+    "billetera-dos-cuerpos": "Billetera de dos cuerpos",
+    portadocumentos: "Portadocumentos",
+    tarjetero: "Tarjetero",
+    "llavero-una-pieza": "Llavero de una pieza",
+    "funda-navaja": "Funda de navaja",
+    "correa-reloj": "Correa de reloj",
   },
 
   photoAlt: {

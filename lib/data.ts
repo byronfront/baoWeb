@@ -185,3 +185,19 @@ export const categories: { key: Product["category"]; label: string }[] = [
 export function isCategory(value: string | undefined): value is Product["category"] {
   return categories.some((c) => c.key === value);
 }
+
+/** Pieces the bench will cut. Catalog slugs keep their sheet; the rest are to measure. */
+export const commissionSlugs = [
+  "cartera-clasica-natural",
+  "cinturon-vintage-marrón",
+  "monedero-minimalista",
+  "riñonera-cuero",
+  "billetera-dos-cuerpos",
+  "portadocumentos",
+  "tarjetero",
+  "llavero-una-pieza",
+  "funda-navaja",
+  "correa-reloj",
+] as const;
+
+export type CommissionSlug = (typeof commissionSlugs)[number];

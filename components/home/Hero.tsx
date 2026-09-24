@@ -57,7 +57,7 @@ export function Hero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
               <Link href={catalogHref(locale)} className="act act-solid w-full sm:w-auto">
                 {dict.ui.viewPieces}
               </Link>
-              <Link href={workshopHref(locale)} className="act-quiet">
+              <Link href={workshopHref(locale)} className="act act-outline w-full sm:w-auto">
                 {dict.ui.enterWorkshop}
               </Link>
             </div>

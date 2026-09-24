@@ -135,9 +135,14 @@ export default async function ProductPage({ params }: Props) {
                 </blockquote>
               )}
 
-              <div className="mt-10 hidden flex-col items-start gap-5 md:flex">
-                {available && <EnquireButton productName={product.name} />}
-                <Link href={contactHref(locale, "escribir")} className="act-quiet">
+              <div className="mt-10 hidden flex-col items-start gap-3 md:flex">
+                {available && (
+                  <EnquireButton
+                    productName={product.name}
+                    className="act act-solid"
+                  />
+                )}
+                <Link href={contactHref(locale, "escribir")} className="act act-outline">
                   {dict.enquire.write}
                 </Link>
               </div>

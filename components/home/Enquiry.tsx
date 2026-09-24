@@ -30,9 +30,9 @@ export function Enquiry({ locale, dict }: { locale: Locale; dict: Dictionary }) 
           </div>
 
           <Reveal delay={120} className="md:col-span-4 md:col-start-9 md:self-end">
-            <div className="flex flex-col items-start gap-6">
+            <div className="flex flex-col items-start gap-3">
               <EnquireButton className="act act-solid w-full sm:w-auto" />
-              <Link href={contactHref(locale, "escribir")} className="act-quiet">
+              <Link href={contactHref(locale, "escribir")} className="act act-outline w-full sm:w-auto">
                 {dict.enquire.write}
               </Link>
             </div>

@@ -9,6 +9,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Ridge, Lozenge } from "@/components/brand/Ornament";
 import { Reveal } from "@/components/motion/Reveal";
 import { EnquireButton } from "@/components/enquire/EnquireHost";
+import { CommissionPieces } from "@/components/contact/CommissionPieces";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -57,6 +58,10 @@ export default async function ContactPage({ params }: Props) {
           <p className="mt-5 max-w-text text-sm text-ink-muted pretty">
             {dict.contact.commissionLead}
           </p>
+          <p className="mt-4 max-w-text text-sm text-ink-faint pretty">
+            {dict.contact.piecesLead}
+          </p>
+          <CommissionPieces />
           <EnquireButton className="act act-solid mt-8 w-full sm:w-auto" />
         </div>
 
@@ -68,7 +73,24 @@ export default async function ContactPage({ params }: Props) {
           <h2 className="mt-4 font-display text-d4 font-light">
             {dict.contact.writeTitle}
           </h2>
-          <ul className="mt-6 seam-t" aria-label={dict.ui.writeWays}>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {contact.whatsapp && (
+              <a
+                href={formatWhatsAppUrl(contact.whatsapp, dict.enquire.general)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="act act-solid w-full sm:w-auto"
+              >
+                {dict.ui.whatsapp}
+              </a>
+            )}
+            {contact.email && (
+              <a href={`mailto:${contact.email}`} className="act act-outline w-full sm:w-auto">
+                {dict.ui.email}
+              </a>
+            )}
+          </div>
+          <ul className="mt-8 seam-t" aria-label={dict.ui.writeWays}>
             {contact.whatsapp && (
               <Reveal as="li" className="seam-b">
                 <a
