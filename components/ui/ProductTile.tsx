@@ -82,16 +82,18 @@ export function ProductTile({
           )}
         </div>
 
-        <div className="mt-5 grid grid-cols-[1fr_auto] items-end gap-x-6 gap-y-1 border-t border-espresso/12 pt-4 transition-colors duration-420 ease-craft group-hover:border-espresso/40">
+        <div className="mt-4 grid grid-cols-[1fr_auto] items-end gap-x-4 gap-y-1 border-t border-espresso/12 pt-4 transition-colors duration-420 ease-craft group-hover:border-espresso/40">
           <h3 className="font-display text-d5 font-normal leading-tight text-ink">
             {product.name}
           </h3>
           <p className="text-sm tabular-nums text-ink">
             {formatPrice(product.price)}
           </p>
-          <p className="col-span-2 text-micro uppercase tracking-[0.16em] text-ink-faint">
+          <p className="col-span-2 text-micro uppercase tracking-[0.12em] text-ink-faint">
             {product.type}
-            {product.spec?.leather ? ` · ${product.spec.leather}` : ""}
+          </p>
+          <p className="col-span-2 mt-1 text-label uppercase text-ink-muted">
+            Ver detalle
           </p>
         </div>
       </Link>

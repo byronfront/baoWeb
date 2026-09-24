@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <section className="on-dark bg-espresso text-chalk">
       <div className="grid md:min-h-[100svh] md:grid-cols-12">
-        <div className="surface-leather relative flex min-h-[100svh] flex-col justify-end px-gutter pb-16 pt-28 md:col-span-5 md:min-h-[100svh] md:justify-between md:pb-16 md:pt-36 lg:col-span-5">
+        <div className="surface-leather relative flex min-h-[78svh] flex-col justify-end px-gutter pb-12 pt-24 md:col-span-5 md:min-h-[100svh] md:justify-between md:pb-16 md:pt-36 lg:col-span-5">
           <p className="hidden text-label uppercase text-chalk-muted md:block">
             {hero.kicker}
           </p>
@@ -27,7 +27,7 @@ export function Hero() {
               {hero.kicker}
             </p>
 
-            <h1 className="mt-8 font-display text-[clamp(3rem,1.5rem+5vw,6.75rem)] font-light leading-[0.88] tracking-[-0.03em] md:mt-0">
+            <h1 className="mt-6 font-display text-d1 font-light md:mt-0">
               {hero.lines.map((line, i) => (
                 <span
                   key={line}
@@ -59,7 +59,7 @@ export function Hero() {
               className="reveal mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
               style={{ "--reveal-delay": "560ms" } as React.CSSProperties}
             >
-              <Link href="/catalogo" className="act act-solid">
+              <Link href="/catalogo" className="act act-solid w-full sm:w-auto">
                 Ver las piezas
               </Link>
               <Link href="/taller" className="act-quiet">

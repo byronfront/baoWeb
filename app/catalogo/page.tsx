@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { categories, isCategory, products } from "@/lib/data";
 import { ProductTile } from "@/components/ui/ProductTile";
-import { Ledger } from "@/components/catalog/Ledger";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Marks } from "@/components/craft/Marks";
 import { Ridge, Lozenge } from "@/components/brand/Ornament";
@@ -14,28 +13,6 @@ export const metadata: Metadata = {
     "Carteras, cinturones y accesorios cortados y cosidos a mano en cuero curtido al vegetal. Cada pieza con su ficha: cuero, curtido, hilo, medidas y tiempo de banco.",
 };
 
-const PLACEMENT = [
-  {
-    className: "md:col-span-7",
-    ratio: "plate" as const,
-    sizes: "(max-width: 768px) 100vw, 54vw",
-  },
-  {
-    className: "md:col-span-4 md:col-start-9 md:mt-28",
-    ratio: "object" as const,
-    sizes: "(max-width: 768px) 100vw, 31vw",
-  },
-  {
-    className: "md:col-span-5 md:col-start-2",
-    ratio: "bench" as const,
-    sizes: "(max-width: 768px) 100vw, 38vw",
-  },
-  {
-    className: "md:col-span-5 md:col-start-8 md:mt-20",
-    ratio: "object" as const,
-    sizes: "(max-width: 768px) 100vw, 38vw",
-  },
-];
 
 type Props = { searchParams: Promise<{ categoria?: string }> };
 
@@ -51,23 +28,23 @@ export default async function CatalogoPage({ searchParams }: Props) {
 
   return (
     <div className="surface-paper bg-bone text-ink">
-      <header className="shell pb-14 pt-section md:pb-20">
-        <div className="grid gap-y-10 md:grid-cols-12 md:gap-x-10">
-          <div className="md:col-span-3">
+      <header className="shell pb-10 pt-10 md:pb-16 md:pt-16">
+        <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-10">
+          <div className="order-1 md:order-none md:col-span-3">
             <SectionLabel className="text-ink-faint">Catálogo</SectionLabel>
-            <h1 className="mt-8 font-display text-d2 font-light">
+            <h1 className="mt-5 font-display text-d3 font-light md:mt-7 md:text-d2">
               {activeLabel ?? "Todas las piezas"}
             </h1>
           </div>
 
-          <p className="max-w-text text-lead text-ink-muted pretty md:col-span-5 md:col-start-5 md:self-end">
+          <p className="order-3 max-w-text text-lead text-ink-muted pretty md:order-none md:col-span-5 md:col-start-5 md:self-end">
             Cada pieza sale del mismo banco y lleva su ficha: qué cuero es,
             cómo se curtió, con qué hilo está cosida y cuánto tarda en hacerse.
           </p>
 
           <nav
             aria-label="Filtrar por categoría"
-            className="flex flex-wrap items-center gap-x-6 gap-y-3 md:col-span-3 md:col-start-10 md:flex-col md:items-start md:gap-y-4 md:self-end"
+            className="order-2 -mx-gutter flex flex-nowrap items-center gap-x-6 overflow-x-auto px-gutter pb-1 md:order-none md:col-span-3 md:col-start-10 md:mx-0 md:flex-col md:items-start md:gap-y-4 md:overflow-visible md:px-0 md:self-end"
           >
             <FilterLink href="/catalogo" active={!active} count={products.length}>
               Todas
@@ -86,30 +63,19 @@ export default async function CatalogoPage({ searchParams }: Props) {
         </div>
       </header>
 
-      {visible.length > 0 && (
-        <div className="shell pb-16 md:hidden">
-          <Ledger products={visible} />
-        </div>
-      )}
-
       <div className="shell pb-section">
         {visible.length > 0 ? (
-          <div className="grid gap-x-10 gap-y-20 md:grid-cols-12">
-            {visible.map((product, i) => {
-              const place = PLACEMENT[i % PLACEMENT.length];
-
-              return (
-                <ProductTile
-                  key={product.id}
-                  product={product}
-                  index={String(i + 1).padStart(2, "0")}
-                  ratio={place.ratio}
-                  sizes={place.sizes}
-                  className={place.className}
-                  priority={i < 2}
-                />
-              );
-            })}
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {visible.map((product, i) => (
+              <ProductTile
+                key={product.id}
+                product={product}
+                index={String(i + 1).padStart(2, "0")}
+                ratio="object"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                priority={i < 2}
+              />
+            ))}
           </div>
         ) : (
           <Reveal className="border-t border-espresso/12 pt-12">
@@ -150,7 +116,7 @@ function FilterLink({
     <Link
       href={href}
       aria-current={active ? "true" : undefined}
-      className={`group relative flex items-baseline gap-1.5 py-1 text-label uppercase ${
+      className={`group relative flex shrink-0 items-baseline gap-1.5 py-1 text-label uppercase ${
         active ? "text-ink" : "text-ink-muted hover:text-ink"
       }`}
     >

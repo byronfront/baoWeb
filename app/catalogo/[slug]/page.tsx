@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
-  contact,
   categories,
   getProductBySlug,
   getRelatedProducts,
   products,
 } from "@/lib/data";
-import { photo } from "@/lib/content";
-import { formatPrice, formatWhatsAppUrl } from "@/lib/format";
+import { enquire, photo } from "@/lib/content";
+import { formatPrice } from "@/lib/format";
 import { Plate } from "@/components/media/Plate";
 import { Ledger } from "@/components/catalog/Ledger";
+import { ProductGallery } from "@/components/catalog/ProductGallery";
 import { SpecList } from "@/components/craft/SpecList";
 import { Marks } from "@/components/craft/Marks";
 import { CraftSteps } from "@/components/craft/CraftSteps";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Lozenge, Seal } from "@/components/brand/Ornament";
+import { Lozenge } from "@/components/brand/Ornament";
 import { Reveal } from "@/components/motion/Reveal";
+import { EnquireButton } from "@/components/enquire/EnquireHost";
+import { ProductSticky } from "@/components/catalog/ProductSticky";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -51,36 +52,16 @@ export default async function ProductPage({ params }: Props) {
 
   if (!product) notFound();
 
-  const [cover, detail] = product.images;
   const related = getRelatedProducts(product.slug);
   const categoryLabel = categories.find((c) => c.key === product.category)?.label;
   const available = product.inStock !== false;
 
-  const enquiryUrl = contact.whatsapp
-    ? formatWhatsAppUrl(contact.whatsapp, `Hola, me interesa: ${product.name}`)
-    : null;
-
   return (
-    <article>
-      {cover && (
-        <section className="relative bg-espresso">
-          <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[4/3] md:aspect-[16/10] md:min-h-[72vh]">
-            <Image
-              src={cover.src}
-              alt={cover.alt}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-        </section>
-      )}
-
-      <header className="surface-paper bg-bone text-ink">
-        <div className="shell pb-16 pt-10 md:pb-20 md:pt-14">
+    <article className="pb-[calc(5.5rem+env(safe-area-inset-bottom))] md:pb-0">
+      <div className="surface-paper bg-bone text-ink">
+        <div className="shell pb-12 pt-6 md:pb-20 md:pt-10">
           <nav aria-label="Migas de pan">
-            <ol className="flex flex-wrap items-center gap-2.5 text-micro uppercase tracking-[0.14em] text-ink-faint">
+            <ol className="flex flex-wrap items-center gap-2.5 text-micro uppercase tracking-[0.12em] text-ink-faint">
               <li>
                 <Link href="/catalogo" className="transition-colors hover:text-ink">
                   Catálogo
@@ -102,92 +83,66 @@ export default async function ProductPage({ params }: Props) {
             </ol>
           </nav>
 
-          <div className="mt-12 grid gap-y-10 md:grid-cols-12 md:gap-x-10">
-            <div className="md:col-span-7">
-              <p className="text-label uppercase text-ink-faint">{product.type}</p>
-              <h1 className="mt-4 max-w-[14ch] font-display text-d2 font-light">
-                {product.name}
-              </h1>
+          <div className="mt-8 grid items-start gap-x-12 gap-y-10 md:mt-12 md:grid-cols-12">
+            <div className="md:col-span-6">
+              <ProductGallery images={product.images} />
             </div>
 
-            <div className="md:col-span-4 md:col-start-9 md:self-end">
-              <p className="font-display text-d4 font-normal tabular-nums">
+            <div className="md:col-span-5 md:col-start-8">
+              <p className="text-label uppercase text-ink-faint">{product.type}</p>
+              <h1 className="mt-3 font-display text-d3 font-light md:text-d2">
+                {product.name}
+              </h1>
+              <p className="mt-4 font-display text-d5 font-normal tabular-nums">
                 {formatPrice(product.price)}
               </p>
               <p className="mt-3 flex items-center gap-2 text-label uppercase text-ink-faint">
                 <Lozenge className="h-[5px] w-[5px]" />
                 {available ? "Se hace por encargo" : "Agotado"}
               </p>
-            </div>
-          </div>
-        </div>
-      </header>
 
-      <section className="surface-paper bg-bone pb-section text-ink">
-        <div className="shell grid gap-x-12 gap-y-14 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <p className="text-lead text-ink-muted pretty">{product.description}</p>
+              <p className="mt-8 text-lead text-ink-muted pretty">
+                {product.description}
+              </p>
 
-            {product.note && (
-              <blockquote className="mt-12 border-l border-espresso/20 pl-6">
-                <p className="font-display text-d5 font-light italic leading-snug">
-                  {product.note}
-                </p>
-                <footer className="mt-4 text-label uppercase text-ink-faint">
-                  Nota de taller
-                </footer>
-              </blockquote>
-            )}
-
-            <div className="mt-12 flex flex-col items-start gap-6">
-              {enquiryUrl && (
-                <a
-                  href={enquiryUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="act act-solid"
-                >
-                  Consultar esta pieza
-                </a>
+              {product.note && (
+                <blockquote className="mt-8 border-l border-espresso/20 pl-5">
+                  <p className="font-display text-d5 font-light italic leading-snug">
+                    {product.note}
+                  </p>
+                  <footer className="mt-3 text-label uppercase text-ink-faint">
+                    Nota de taller
+                  </footer>
+                </blockquote>
               )}
-              <Link href="/contacto" className="act-quiet">
-                Otras formas de contacto
-              </Link>
+
+              <div className="mt-10 hidden flex-col items-start gap-5 md:flex">
+                {available && <EnquireButton productName={product.name} />}
+                <Link href="/contacto#escribir" className="act-quiet">
+                  {enquire.write}
+                </Link>
+              </div>
             </div>
           </div>
-
-          {detail && (
-            <Plate
-              src={detail.src}
-              alt={detail.alt}
-              ratio="bench"
-              sizes="(max-width: 768px) 100vw, 46vw"
-              parallax={20}
-              marks
-              className="md:col-span-6 md:col-start-7"
-              caption={detail.alt}
-            />
-          )}
         </div>
-      </section>
+      </div>
 
       {product.spec && (
         <section className="surface-paper bg-ivory py-section text-ink">
-          <div className="shell grid gap-x-12 gap-y-14 md:grid-cols-12">
+          <div className="shell grid gap-x-12 gap-y-10 md:grid-cols-12">
             <div className="md:col-span-4">
               <SectionLabel className="text-ink-faint">Ficha</SectionLabel>
-              <h2 className="mt-6 max-w-[14ch] font-display text-d4 font-light">
+              <h2 className="mt-5 max-w-[14ch] font-display text-d4 font-light">
                 Lo que se puede medir
               </h2>
-              <p className="mt-6 max-w-[28ch] text-sm text-ink-muted pretty">
+              <p className="mt-5 max-w-[28ch] text-sm text-ink-muted pretty">
                 Si algo no encaja, se cambia antes de cortar.
               </p>
-              <Seal className="mt-10 hidden h-12 w-12 text-espresso/20 md:block" />
             </div>
 
             <div className="md:col-span-7 md:col-start-6">
               <SpecList spec={product.spec} />
-              <Marks className="mt-14" />
+              <Marks className="mt-12" />
             </div>
           </div>
         </section>
@@ -195,12 +150,12 @@ export default async function ProductPage({ params }: Props) {
 
       <section className="on-dark surface-leather bg-espresso py-section text-chalk">
         <div className="shell">
-          <div className="grid gap-y-8 md:grid-cols-12 md:gap-x-10">
+          <div className="grid gap-y-6 md:grid-cols-12 md:gap-x-10">
             <div className="md:col-span-5">
               <SectionLabel className="text-chalk-faint">
                 Cómo se hizo
               </SectionLabel>
-              <h2 className="mt-6 max-w-[13ch] font-display text-d3 font-light">
+              <h2 className="mt-5 max-w-[13ch] font-display text-d3 font-light">
                 Del corte al último punto
               </h2>
             </div>
@@ -215,7 +170,7 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
 
-        <div className="shell-wide mt-16 grid gap-4 md:mt-20 md:grid-cols-3">
+        <div className="shell mt-12 grid gap-3 md:mt-16 md:grid-cols-3 md:gap-4">
           <Plate
             src={photo.cutting.src}
             alt={photo.cutting.alt}
@@ -240,21 +195,14 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <div className="shell">
-          <CraftSteps className="mt-20" columns={3} />
+          <CraftSteps className="mt-16" columns={3} />
 
-          {enquiryUrl && (
-            <div className="mt-20 flex flex-col items-start gap-6 border-t border-chalk/12 pt-10 sm:flex-row sm:items-center sm:justify-between">
+          {available && (
+            <div className="mt-16 flex flex-col items-start gap-6 border-t border-chalk/12 pt-10 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-narrow font-display text-d5 font-light">
                 ¿La querés con otras medidas?
               </p>
-              <a
-                href={enquiryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="act act-solid"
-              >
-                Escribir al taller
-              </a>
+              <EnquireButton productName={product.name} />
             </div>
           )}
         </div>
@@ -262,15 +210,13 @@ export default async function ProductPage({ params }: Props) {
 
       {related.length > 0 && (
         <section className="surface-paper bg-bone py-section text-ink">
-          <div className="shell grid gap-x-12 gap-y-12 md:grid-cols-12">
+          <div className="shell grid gap-x-12 gap-y-10 md:grid-cols-12">
             <div className="md:col-span-4">
-              <SectionLabel className="text-ink-faint">
-                Otras piezas
-              </SectionLabel>
-              <p className="mt-6 max-w-[22ch] font-display text-d4 font-light">
+              <SectionLabel className="text-ink-faint">Otras piezas</SectionLabel>
+              <p className="mt-5 max-w-[22ch] font-display text-d4 font-light">
                 También en el banco
               </p>
-              <Link href="/catalogo" className="act-quiet mt-8">
+              <Link href="/catalogo" className="act-quiet mt-6">
                 Ver el catálogo
               </Link>
             </div>
@@ -280,6 +226,10 @@ export default async function ProductPage({ params }: Props) {
             </div>
           </div>
         </section>
+      )}
+
+      {available && (
+        <ProductSticky name={product.name} price={product.price} />
       )}
     </article>
   );

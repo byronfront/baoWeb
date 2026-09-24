@@ -56,34 +56,34 @@ const config: Config = {
        * el interlineado va más cerrado que en una grotesca.
        */
       fontSize: {
-        label: ["0.6875rem", { lineHeight: "1.1", letterSpacing: "0.22em" }],
-        micro: ["0.75rem", { lineHeight: "1.5", letterSpacing: "0.08em" }],
+        label: ["0.75rem", { lineHeight: "1.2", letterSpacing: "0.16em" }],
+        micro: ["0.8125rem", { lineHeight: "1.5", letterSpacing: "0.06em" }],
         xs: ["0.8125rem", { lineHeight: "1.65" }],
-        sm: ["0.875rem", { lineHeight: "1.7" }],
-        base: ["1.0625rem", { lineHeight: "1.75" }],
+        sm: ["0.9375rem", { lineHeight: "1.65" }],
+        base: ["1.0625rem", { lineHeight: "1.7" }],
         lead: [
-          "clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem)",
+          "clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem)",
           { lineHeight: "1.65" },
         ],
         d5: [
-          "clamp(1.5rem, 1.35rem + 0.7vw, 1.875rem)",
-          { lineHeight: "1.2", letterSpacing: "-0.01em" },
+          "clamp(1.375rem, 1.25rem + 0.45vw, 1.625rem)",
+          { lineHeight: "1.25", letterSpacing: "-0.01em" },
         ],
         d4: [
-          "clamp(1.875rem, 1.5rem + 1.4vw, 2.75rem)",
-          { lineHeight: "1.12", letterSpacing: "-0.015em" },
+          "clamp(1.625rem, 1.4rem + 0.9vw, 2.25rem)",
+          { lineHeight: "1.18", letterSpacing: "-0.015em" },
         ],
         d3: [
-          "clamp(2.5rem, 1.8rem + 2.4vw, 4rem)",
-          { lineHeight: "1.04", letterSpacing: "-0.02em" },
+          "clamp(2rem, 1.55rem + 1.6vw, 3.25rem)",
+          { lineHeight: "1.08", letterSpacing: "-0.02em" },
         ],
         d2: [
-          "clamp(3rem, 1.8rem + 4.4vw, 6.25rem)",
-          { lineHeight: "0.96", letterSpacing: "-0.025em" },
+          "clamp(2.25rem, 1.6rem + 2.6vw, 4.25rem)",
+          { lineHeight: "1.02", letterSpacing: "-0.025em" },
         ],
         d1: [
-          "clamp(3.75rem, 1.4rem + 8.5vw, 10rem)",
-          { lineHeight: "0.88", letterSpacing: "-0.03em" },
+          "clamp(2.75rem, 1.5rem + 5vw, 6.5rem)",
+          { lineHeight: "0.94", letterSpacing: "-0.03em" },
         ],
       },
 

@@ -3,6 +3,8 @@ import { Cormorant_Garamond, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { EnquireProvider } from "@/components/enquire/EnquireContext";
+import { EnquireHost } from "@/components/enquire/EnquireHost";
 
 /**
  * Dos voces.
@@ -28,6 +30,7 @@ export const viewport: Viewport = {
   themeColor: "#1c1410",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
@@ -68,11 +71,14 @@ export default function RootLayout({
         >
           Saltar al contenido
         </a>
-        <Header />
-        <main id="contenido" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <EnquireProvider>
+          <Header />
+          <main id="contenido" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <EnquireHost />
+        </EnquireProvider>
       </body>
     </html>
   );

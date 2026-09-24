@@ -54,20 +54,18 @@ export function Banco() {
         </div>
 
         {rest.length >= 2 && (
-          <div className="mt-24 grid gap-x-10 gap-y-16 md:mt-32 md:grid-cols-12">
+          <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:mt-24">
             <ProductTile
               product={rest[0]}
               index="02"
               ratio="object"
-              sizes="(max-width: 768px) 100vw, 34vw"
-              className="md:col-span-4 md:mt-24"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
             <ProductTile
               product={rest[1]}
               index="03"
-              ratio="bench"
-              sizes="(max-width: 768px) 100vw, 42vw"
-              className="md:col-span-5 md:col-start-7"
+              ratio="object"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         )}

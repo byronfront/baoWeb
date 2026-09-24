@@ -3,10 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { contact } from "@/lib/data";
-import { nav } from "@/lib/content";
-import { formatWhatsAppUrl } from "@/lib/format";
-import { Lozenge, Ridge, Seal, Wordmark } from "@/components/brand/Ornament";
+import { nav, enquire } from "@/lib/content";
+import { Lozenge, Ridge, Wordmark } from "@/components/brand/Ornament";
 
 export function Header() {
   const pathname = usePathname();
@@ -91,20 +89,13 @@ export function Header() {
               );
             })}
 
-            {contact.whatsapp && (
-              <a
-                href={formatWhatsAppUrl(
-                  contact.whatsapp,
-                  "Hola, quisiera preguntar por un encargo."
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="act-quiet ml-1 opacity-70 hover:opacity-100"
-              >
-                <Lozenge className="h-[5px] w-[5px]" />
-                Escribir
-              </a>
-            )}
+            <Link
+              href="/contacto#escribir"
+              className="act-quiet ml-1 opacity-70 hover:opacity-100"
+            >
+              <Lozenge className="h-[5px] w-[5px]" />
+              {enquire.write}
+            </Link>
           </nav>
 
           <button
@@ -178,7 +169,9 @@ function MobileMenu({ open, pathname }: { open: boolean; pathname: string }) {
             <br />
             Se hace por encargo, en lotes pequeños.
           </p>
-          <Seal className="h-10 w-10 shrink-0 text-chalk/30" />
+          <Link href="/contacto#escribir" className="act-quiet shrink-0">
+            {enquire.write}
+          </Link>
         </div>
       </div>
     </div>

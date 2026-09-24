@@ -44,6 +44,22 @@ export const nav = [
   { href: "/contacto", label: "Encargo" },
 ];
 
+export const enquire = {
+  cta: "Encargar",
+  write: "Escribir",
+  toastTitle: "Se hace por encargo",
+  toastBody: "El patrón se ajusta antes de cortar. Cinco a quince días de banco.",
+  toastDismiss: "Ahora no",
+  modalTitle: "Encargar una pieza",
+  modalLead:
+    "Se confirma el cuero, el hilo, las medidas y la fecha por escrito. Después se corta.",
+  modalWhatsApp: "WhatsApp",
+  modalEmail: "Correo",
+  modalContact: "Otras formas de escribir",
+  product: (name: string) => `Hola, me interesa: ${name}`,
+  general: "Hola, quisiera encargar una pieza a medida.",
+};
+
 export const hero = {
   kicker: "Marroquinería de taller",
   lines: ["Hecho", "para", "quedarse"],
@@ -129,23 +145,66 @@ export const patina = {
   ],
 };
 
-export const workshopChapters = [
+export type WorkshopNote = {
+  slug: string;
+  date: string;
+  dateLabel: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  photo: Photo;
+};
+
+export const workshopNotes: WorkshopNote[] = [
   {
-    step: "I",
+    slug: "el-banco",
+    date: "2024-11",
+    dateLabel: "Noviembre 2024",
     title: "El banco",
-    body: "Una mesa de madera maciza marcada por los cortes de quien trabajó antes. Las muescas no se lijan: sirven de referencia. La luz entra por un solo lado, de mañana, y es la que decide a qué hora se cosen las piezas oscuras.",
+    excerpt:
+      "Una mesa marcada por quien trabajó antes. La luz entra por un solo lado y decide a qué hora se cosen las piezas oscuras.",
+    body: "Una mesa de madera maciza marcada por los cortes de quien trabajó antes. Las muescas no se lijan: sirven de referencia. La luz entra por un solo lado, de mañana, y es la que decide a qué hora se cosen las piezas oscuras.\n\nNo hay línea de producción ni máquina de coser. Hay una mesa marcada, herramientas que ya trabajaban antes de llegar aquí, y el orden de siempre: corte, descanso, costura, bruñido.",
     photo: photo.heroWorkshop,
   },
   {
-    step: "II",
+    slug: "las-herramientas",
+    date: "2025-02",
+    dateLabel: "Febrero 2025",
     title: "Las herramientas",
-    body: "Cuchilla redonda, punzones, sacabocados, bruñidor de madera y compás de puntas. Casi todas son de segunda mano y algunas más viejas que el taller. Se afilan cada mañana antes de empezar.",
+    excerpt:
+      "Cuchilla redonda, punzones, bruñidor. Casi todas de segunda mano; algunas más viejas que el taller.",
+    body: "Cuchilla redonda, punzones, sacabocados, bruñidor de madera y compás de puntas. Casi todas son de segunda mano y algunas más viejas que el taller. Se afilan cada mañana antes de empezar.\n\nLa cuchilla redonda llegó sin mango y corta mejor que cualquiera que se venda hoy. Cada herramienta tiene su sitio. Siempre el mismo.",
     photo: photo.tools,
   },
   {
-    step: "III",
+    slug: "el-tiempo",
+    date: "2025-06",
+    dateLabel: "Junio 2025",
     title: "El tiempo",
-    body: "Una pieza pasa por el banco varias veces antes de salir. Entre el corte y la costura el cuero descansa; entre el bruñido y el acabado, también. Nada sale el mismo día en que se empieza.",
+    excerpt:
+      "Nada sale el mismo día en que se empieza. Entre el corte y la costura el cuero descansa.",
+    body: "Una pieza pasa por el banco varias veces antes de salir. Entre el corte y la costura el cuero descansa; entre el bruñido y el acabado, también. Nada sale el mismo día en que se empieza.\n\nForzar el orden se nota en el canto tres años después. Por eso hay que avisar la fecha antes de empezar: entre cinco y quince días de banco, según la pieza.",
     photo: photo.burnishing,
   },
+  {
+    slug: "la-patina",
+    date: "2025-09",
+    dateLabel: "Septiembre 2025",
+    title: "La pátina",
+    excerpt:
+      "Sale claro y se oscurece con la luz, la grasa de las manos y el roce de los días.",
+    body: "Curtido al vegetal, sin pigmento que lo tape. Sale del taller claro y se va oscureciendo con la luz, la grasa de las manos y el roce de los días.\n\nEl mismo monedero: día uno, casi crudo; al año, la miel empieza a aparecer; a los diez, ámbar oscuro y el grano a la vista. El cuero cambia con quien lo lleva.",
+    photo: photo.patina,
+  },
 ];
+
+export function getWorkshopNote(slug: string): WorkshopNote | undefined {
+  return workshopNotes.find((note) => note.slug === slug);
+}
+
+export const workshopChapters = workshopNotes.slice(0, 3).map((note, i) => ({
+  step: ["I", "II", "III"][i] ?? String(i + 1),
+  title: note.title,
+  body: note.excerpt,
+  photo: note.photo,
+}));

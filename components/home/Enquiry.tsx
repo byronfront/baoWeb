@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { contact } from "@/lib/data";
-import { formatWhatsAppUrl } from "@/lib/format";
+import { enquire } from "@/lib/content";
 import { Ridge } from "@/components/brand/Ornament";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { EnquireButton } from "@/components/enquire/EnquireHost";
 
 export function Enquiry() {
   return (
@@ -31,22 +31,9 @@ export function Enquiry() {
 
           <Reveal delay={120} className="md:col-span-4 md:col-start-9 md:self-end">
             <div className="flex flex-col items-start gap-6">
-              {contact.whatsapp && (
-                <a
-                  href={formatWhatsAppUrl(
-                    contact.whatsapp,
-                    "Hola, quisiera encargar una pieza a medida."
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="act act-solid"
-                >
-                  Escribir por WhatsApp
-                </a>
-              )}
-
-              <Link href="/contacto" className="act-quiet">
-                Correo e Instagram
+              <EnquireButton className="act act-solid w-full sm:w-auto" />
+              <Link href="/contacto#escribir" className="act-quiet">
+                {enquire.write}
               </Link>
             </div>
 
