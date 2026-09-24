@@ -44,7 +44,7 @@ export default async function CatalogoPage({ searchParams }: Props) {
 
           <nav
             aria-label="Filtrar por categoría"
-            className="order-2 -mx-gutter flex flex-nowrap items-center gap-x-6 overflow-x-auto px-gutter pb-1 md:order-none md:col-span-3 md:col-start-10 md:mx-0 md:flex-col md:items-start md:gap-y-4 md:overflow-visible md:px-0 md:self-end"
+            className="order-2 min-w-0 max-w-full -mx-gutter flex flex-nowrap items-center gap-x-6 overflow-x-auto px-gutter pb-1 md:order-none md:col-span-3 md:col-start-10 md:mx-0 md:flex-col md:items-start md:gap-y-4 md:overflow-visible md:px-0 md:self-end"
           >
             <FilterLink href="/catalogo" active={!active} count={products.length}>
               Todas

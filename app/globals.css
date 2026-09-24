@@ -31,6 +31,12 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  @media (max-width: 767px) {
+    html {
+      overflow-x: hidden;
+    }
+  }
+
   body {
     @apply bg-bone font-sans text-base text-ink antialiased;
     font-feature-settings: "kern", "liga";

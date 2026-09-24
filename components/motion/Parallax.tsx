@@ -16,9 +16,15 @@ export function Parallax({
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const desktop = window.matchMedia("(min-width: 768px)");
     let frame = 0;
 
     const update = () => {
+      if (!desktop.matches) {
+        el.style.transform = "";
+        return;
+      }
+
       const rect = el.getBoundingClientRect();
       const view = window.innerHeight || 1;
       const progress = (rect.top + rect.height / 2 - view / 2) / view;
@@ -31,11 +37,13 @@ export function Parallax({
     };
 
     update();
+    desktop.addEventListener("change", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
 
     return () => {
       cancelAnimationFrame(frame);
+      desktop.removeEventListener("change", onScroll);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };

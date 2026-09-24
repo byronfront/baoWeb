@@ -12,7 +12,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
 
   return (
     <div>
-      <div className="relative aspect-[4/5] overflow-hidden bg-tobacco sm:aspect-[4/3] md:aspect-[4/5]">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-tobacco">
         <Image
           src={current.src}
           alt={current.alt}

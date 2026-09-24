@@ -76,7 +76,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-[4/5] md:col-span-7 md:aspect-auto md:min-h-[100svh]">
+        <div className="relative aspect-[4/5] w-full overflow-hidden md:col-span-7 md:aspect-auto md:min-h-[100svh] md:overflow-visible">
           <Parallax strength={32}>
             <Image
               src={photo.heroWorkshop.src}
@@ -84,7 +84,7 @@ export function Hero() {
               fill
               priority
               sizes="(max-width: 768px) 100vw, 58vw"
-              className="object-cover object-[42%_78%]"
+              className="object-cover object-center md:object-[42%_78%]"
             />
           </Parallax>
 

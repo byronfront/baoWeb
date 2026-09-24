@@ -17,7 +17,7 @@ export default function TallerPage() {
   return (
     <div>
       <section className="on-dark relative bg-espresso text-chalk">
-        <div className="relative aspect-[4/3] w-full sm:aspect-[16/10] md:aspect-[16/9] md:min-h-[56vh]">
+        <div className="relative aspect-[4/3] w-full overflow-hidden sm:aspect-[16/10] md:aspect-[16/9] md:min-h-[56vh] md:overflow-visible">
           <Parallax strength={22}>
             <Image
               src={photo.heroWorkshop.src}

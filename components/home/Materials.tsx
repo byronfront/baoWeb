@@ -12,7 +12,7 @@ export function Materials() {
   return (
     <section className="on-dark surface-leather bg-charcoal text-chalk">
       <div className="grid lg:grid-cols-12">
-        <div className="relative aspect-[4/5] sm:aspect-bench lg:col-span-6 lg:aspect-auto lg:min-h-[92vh]">
+        <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-bench lg:col-span-6 lg:aspect-auto lg:min-h-[92vh] lg:overflow-visible">
           <Parallax strength={36}>
             <Image
               src={photo.hides.src}

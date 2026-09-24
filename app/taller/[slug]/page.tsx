@@ -49,7 +49,7 @@ export default async function WorkshopNotePage({ params }: Props) {
         </h1>
       </header>
 
-      <div className="relative aspect-[4/5] w-full bg-tobacco sm:aspect-[16/9] md:min-h-[52vh]">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-tobacco sm:aspect-[16/9] md:min-h-[52vh]">
         <Image
           src={note.photo.src}
           alt={note.photo.alt}
