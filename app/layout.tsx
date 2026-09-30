@@ -6,7 +6,7 @@ const display = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
   display: "swap",
   variable: "--font-display",
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500"],
   style: ["normal", "italic"],
 });
 
@@ -14,7 +14,7 @@ const sans = IBM_Plex_Sans({
   subsets: ["latin", "cyrillic"],
   display: "swap",
   variable: "--font-sans",
-  weight: ["400", "500"],
+  weight: ["400"],
 });
 
 export const viewport: Viewport = {

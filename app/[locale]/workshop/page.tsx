@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { workshopNotes } from "@/lib/content";
+import { photo, workshopNotes } from "@/lib/content";
 import {
   getDictionary,
   isLocale,
@@ -12,7 +12,6 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Ridge } from "@/components/brand/Ornament";
 import { Parallax } from "@/components/motion/Parallax";
 import { EnquireButton } from "@/components/enquire/EnquireHost";
-import { photo } from "@/lib/content";
 
 type Props = { params: Promise<{ locale: string }> };
 

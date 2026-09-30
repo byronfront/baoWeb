@@ -11,14 +11,12 @@ export {
   defaultLocale,
   localeCookie,
   localeMeta,
-  paths,
   isLocale,
   href,
   catalogHref,
   workshopHref,
   contactHref,
   switchLocalePath,
-  localeFromPath,
 } from "./config";
 
 const dictionaries: Record<Locale, Dictionary> = { es, en, ru };

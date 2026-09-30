@@ -9,7 +9,7 @@ import type { CSSProperties } from "react";
    Materia (ritmo): una cresta quebrada — la línea de una cordillera —
    cruza el centro. El rombo se escalona en peldaños, no en curva.
 
-   De este sello salen el friso, el divisor, las viñetas y las escuadras.
+   De este sello salen el divisor, las viñetas y las escuadras.
    ========================================================================== */
 
 const FRAME = "M6 6 H58 V58 H6 Z";
@@ -28,20 +28,17 @@ type SealProps = {
   className?: string;
   /** Solo el rombo y el núcleo. Para tamaños menores de ~18px. */
   compact?: boolean;
-  title?: string;
 };
 
-export function Seal({ className, compact = false, title }: SealProps) {
+export function Seal({ className, compact = false }: SealProps) {
   return (
     <svg
       viewBox="0 0 64 64"
       fill="none"
       className={className}
-      role={title ? "img" : "presentation"}
-      aria-hidden={title ? undefined : true}
-      aria-label={title}
+      role="presentation"
+      aria-hidden
     >
-      {title ? <title>{title}</title> : null}
       {!compact && (
         <>
           <path d={FRAME} stroke="currentColor" strokeWidth="1" opacity="0.4" />
@@ -59,20 +56,15 @@ export function Seal({ className, compact = false, title }: SealProps) {
   );
 }
 
-type LozengeProps = {
-  className?: string;
-  outline?: boolean;
-};
-
 /** Viñeta. El rombo mínimo del sello. */
-export function Lozenge({ className, outline = false }: LozengeProps) {
+export function Lozenge({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 8 8" className={className} aria-hidden="true">
       <path
         d="M4 0.4 L7.6 4 L4 7.6 L0.4 4 Z"
-        fill={outline ? "none" : "currentColor"}
+        fill="currentColor"
         stroke="currentColor"
-        strokeWidth={outline ? 1 : 0}
+        strokeWidth={0}
       />
     </svg>
   );
@@ -103,38 +95,6 @@ export function Ridge({ className, height = 12 }: RidgeProps) {
   };
 
   return <div aria-hidden="true" className={className} style={style} />;
-}
-
-/** Alias histórico: el friso es ahora la cresta. */
-export const Frieze = Ridge;
-
-type RuleProps = {
-  className?: string;
-  mark?: "start" | "center" | "none";
-  draw?: boolean;
-};
-
-export function Rule({ className, mark = "center", draw = false }: RuleProps) {
-  const line = `h-px flex-1 bg-current opacity-20 ${draw ? "reveal-line" : ""}`;
-
-  if (mark === "none") {
-    return (
-      <div aria-hidden="true" className={`flex ${className ?? ""}`}>
-        <span className={line} />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      aria-hidden="true"
-      className={`flex items-center gap-4 ${className ?? ""}`}
-    >
-      {mark === "center" && <span className={line} />}
-      <Lozenge className="h-[5px] w-[5px] shrink-0 opacity-55" />
-      <span className={line} style={{ transitionDelay: "120ms" }} />
-    </div>
-  );
 }
 
 type CornerMarksProps = {
@@ -172,15 +132,10 @@ export function CornerMarks({
   );
 }
 
-type WordmarkProps = {
-  className?: string;
-  withSeal?: boolean;
-};
-
-export function Wordmark({ className, withSeal = true }: WordmarkProps) {
+export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
-      {withSeal && <Seal className="h-[1.05em] w-[1.05em] shrink-0" />}
+      <Seal className="h-[1.05em] w-[1.05em] shrink-0" />
       <span className="font-display text-[1.45em] font-medium leading-none tracking-[0.2em]">
         BAO
       </span>

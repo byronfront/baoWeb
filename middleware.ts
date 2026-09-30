@@ -3,7 +3,6 @@ import {
   defaultLocale,
   isLocale,
   localeCookie,
-  locales,
   type Locale,
 } from "@/lib/i18n/config";
 

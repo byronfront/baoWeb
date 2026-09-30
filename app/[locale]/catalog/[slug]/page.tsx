@@ -219,7 +219,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         <div className="shell">
-          <CraftSteps steps={dict.craftSteps} className="mt-16" columns={3} />
+          <CraftSteps steps={dict.craftSteps} className="mt-16" />
 
           {available && (
             <div className="mt-16 flex flex-col items-start gap-6 border-t border-chalk/12 pt-10 sm:flex-row sm:items-center sm:justify-between">

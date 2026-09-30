@@ -2,16 +2,13 @@ import { Reveal } from "@/components/motion/Reveal";
 
 type CraftStepsProps = {
   steps: { step: string; title: string; body: string }[];
-  columns?: 2 | 3;
   className?: string;
 };
 
-export function CraftSteps({ steps, columns = 3, className }: CraftStepsProps) {
+export function CraftSteps({ steps, className }: CraftStepsProps) {
   return (
     <ol
-      className={`grid gap-x-10 gap-y-12 sm:grid-cols-2 ${
-        columns === 3 ? "lg:grid-cols-3" : ""
-      } ${className ?? ""}`}
+      className={`grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 ${className ?? ""}`}
     >
       {steps.map(({ step, title, body }, i) => (
         <Reveal as="li" key={step} delay={i * 70} className="seam-t pt-6">

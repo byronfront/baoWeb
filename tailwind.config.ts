@@ -11,17 +11,13 @@ const material = {
   ivory: "#e6d4b8",
   parchment: "#d4bc94",
   sand: "#c4a07a",
-  clay: "#b6795c",
-  terracotta: "#a45d43",
   cognac: "#9a5830",
   burnt: "#6e3f2b",
   tobacco: "#3f281f",
   charcoal: "#241e1b",
   espresso: "#1c1410",
   pitch: "#100c0a",
-  olive: "#454534",
   brass: "#7d6540",
-  bronze: "#5c4734",
 };
 
 const config: Config = {
@@ -58,7 +54,6 @@ const config: Config = {
       fontSize: {
         label: ["0.75rem", { lineHeight: "1.2", letterSpacing: "0.16em" }],
         micro: ["0.8125rem", { lineHeight: "1.5", letterSpacing: "0.06em" }],
-        xs: ["0.8125rem", { lineHeight: "1.65" }],
         sm: ["0.9375rem", { lineHeight: "1.65" }],
         base: ["1.0625rem", { lineHeight: "1.7" }],
         lead: [
@@ -90,7 +85,6 @@ const config: Config = {
       spacing: {
         gutter: "clamp(1.25rem, 0.7rem + 2.4vw, 4rem)",
         section: "clamp(5rem, 3rem + 8vw, 11rem)",
-        "section-lg": "clamp(6.5rem, 3rem + 14vw, 16rem)",
       },
 
       maxWidth: {
@@ -100,14 +94,8 @@ const config: Config = {
         narrow: "42ch",
       },
 
-      borderRadius: {
-        DEFAULT: "1px",
-        seam: "0px",
-      },
-
       transitionTimingFunction: {
         craft: "cubic-bezier(0.22, 1, 0.36, 1)",
-        material: "cubic-bezier(0.65, 0, 0.35, 1)",
       },
 
       transitionDuration: {

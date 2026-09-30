@@ -7,7 +7,6 @@ import {
   localeCookie,
   localeMeta,
   switchLocalePath,
-  type Locale,
 } from "@/lib/i18n";
 import { useLocale } from "./LocaleProvider";
 
@@ -40,7 +39,7 @@ export function LanguageSwitch({
                 }}
                 className={active ? current : `${muted} transition-opacity hover:opacity-100`}
               >
-                {localeMeta[code as Locale].label}
+                {localeMeta[code].label}
               </Link>
             </li>
           );

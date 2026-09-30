@@ -73,9 +73,7 @@ export const ru: Dictionary = {
     filter: "Фильтр по типу",
     breadcrumb: "Путь",
     catalog: "Каталог",
-    pieceNotFound: "Вещь не найдена",
     noteNotFound: "Запись не найдена",
-    otherWays: "Instagram и визит",
     writeWays: "Как написать",
     marks: "Как сделано",
     footerLine: "Крой, шов и урез — вручную",
@@ -86,7 +84,6 @@ export const ru: Dictionary = {
     emptyCategoryLead:
       "Можно сделать на заказ. Можно посмотреть остальной каталог.",
     viewAllPieces: "Смотреть все вещи",
-    seeWorkshop: "Смотреть мастерскую",
   },
 
   categories: {
@@ -238,7 +235,6 @@ export const ru: Dictionary = {
 
   catalog: {
     title: "Вещи",
-    heading: "Все вещи",
     description:
       "Сумки, ремни и мелочь, кроенные и шитые вручную из кожи растительного дубления. У каждой — лист: кожа, дубление, нить, размеры и срок на верстаке.",
     lead: "Каждая вещь сходит с одного верстака и несёт свой лист: какая кожа, как дублена, какой нитью шита и сколько дней занимает.",

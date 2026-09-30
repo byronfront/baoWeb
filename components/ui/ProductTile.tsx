@@ -14,7 +14,6 @@ import { Reveal } from "@/components/motion/Reveal";
 const RATIO = {
   object: "aspect-object",
   plate: "aspect-plate",
-  bench: "aspect-bench",
 } as const;
 
 type ProductTileProps = {

@@ -21,7 +21,6 @@ export const products: Product[] = [
     note: "La estructura se sostiene sola. No lleva refuerzo interno: es el espesor del cuero el que mantiene la forma.",
     price: 18500,
     category: "carteras",
-    featured: true,
     inStock: true,
     spec: {
       leather: "Vacuno flor entera, 2,2 mm",
@@ -58,7 +57,6 @@ export const products: Product[] = [
     note: "Cortado de una sola tira del lomo, la zona más densa de la piel. Por eso no se estira con los años.",
     price: 8500,
     category: "cinturones",
-    featured: true,
     inStock: true,
     spec: {
       leather: "Vacuno flor entera del lomo, 3,8 mm",
@@ -94,7 +92,6 @@ export const products: Product[] = [
     note: "Sale del taller claro, casi crudo. El color lo pone el uso: en un año será miel, en cinco, ámbar oscuro.",
     price: 4200,
     category: "accesorios",
-    featured: true,
     inStock: true,
     spec: {
       leather: "Vacuno flor entera, 1,4 mm rebajado a 0,8 en los pliegues",
@@ -130,7 +127,6 @@ export const products: Product[] = [
     note: "La correa se puede acortar en casa con un punzón. Está pensada para que dure más que la moda que la trajo.",
     price: 12500,
     category: "accesorios",
-    featured: false,
     inStock: true,
     spec: {
       leather: "Vacuno flor entera, 1,8 mm",
@@ -162,28 +158,20 @@ export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
 
-export function getFeaturedProducts(): Product[] {
-  return products.filter((p) => p.featured);
-}
-
-export function getProductsByCategory(category: Product["category"]): Product[] {
-  return products.filter((p) => p.category === category);
-}
-
 /** Otras piezas del catálogo, excluida la que se está mirando. */
-export function getRelatedProducts(slug: string, limit = 3): Product[] {
-  return products.filter((p) => p.slug !== slug).slice(0, limit);
+export function getRelatedProducts(slug: string): Product[] {
+  return products.filter((p) => p.slug !== slug).slice(0, 3);
 }
 
-export const categories: { key: Product["category"]; label: string }[] = [
-  { key: "carteras", label: "Carteras" },
-  { key: "cinturones", label: "Cinturones" },
-  { key: "accesorios", label: "Accesorios" },
-  { key: "otros", label: "Otros" },
+const CATEGORY_KEYS: Product["category"][] = [
+  "carteras",
+  "cinturones",
+  "accesorios",
+  "otros",
 ];
 
 export function isCategory(value: string | undefined): value is Product["category"] {
-  return categories.some((c) => c.key === value);
+  return !!value && CATEGORY_KEYS.includes(value as Product["category"]);
 }
 
 /** Pieces the bench will cut. Catalog slugs keep their sheet; the rest are to measure. */
@@ -199,5 +187,3 @@ export const commissionSlugs = [
   "funda-navaja",
   "correa-reloj",
 ] as const;
-
-export type CommissionSlug = (typeof commissionSlugs)[number];

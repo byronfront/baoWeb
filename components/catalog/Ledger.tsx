@@ -8,7 +8,6 @@ type LedgerProps = {
   products: Product[];
   locale: Locale;
   className?: string;
-  start?: number;
 };
 
 /**
@@ -16,7 +15,7 @@ type LedgerProps = {
  * Nombre, tipo y precio en un renglón. Sin fotografía, sin caja.
  * Es la forma más honesta de listar lo que hay en el banco.
  */
-export function Ledger({ products, locale, className, start = 1 }: LedgerProps) {
+export function Ledger({ products, locale, className }: LedgerProps) {
   const dict = getDictionary(locale);
 
   return (
@@ -31,7 +30,7 @@ export function Ledger({ products, locale, className, start = 1 }: LedgerProps) 
               className="group grid grid-cols-[2.25rem_minmax(0,1fr)_auto] items-baseline gap-x-4 py-5 sm:grid-cols-[2.75rem_minmax(0,1fr)_auto]"
             >
               <span className="text-label tabular-nums text-ink-faint">
-                {String(start + i).padStart(2, "0")}
+                {String(i + 1).padStart(2, "0")}
               </span>
 
               <span className="min-w-0">

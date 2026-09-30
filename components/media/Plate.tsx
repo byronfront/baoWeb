@@ -7,11 +7,7 @@ import { CornerMarks, Lozenge } from "@/components/brand/Ornament";
 const RATIO = {
   plate: "aspect-plate",
   object: "aspect-object",
-  bench: "aspect-bench",
   square: "aspect-square",
-  frieze: "aspect-frieze",
-  panorama: "aspect-panorama",
-  fill: "h-full",
 } as const;
 
 type PlateProps = {
@@ -24,7 +20,6 @@ type PlateProps = {
   parallax?: number;
   marks?: boolean;
   caption?: ReactNode;
-  hoverZoom?: boolean;
 };
 
 export function Plate({
@@ -37,7 +32,6 @@ export function Plate({
   parallax = 0,
   marks = false,
   caption,
-  hoverZoom = false,
 }: PlateProps) {
   const image = (
     <Image
@@ -46,11 +40,7 @@ export function Plate({
       fill
       sizes={sizes}
       priority={priority}
-      className={`object-cover ${
-        hoverZoom
-          ? "transition-transform duration-1100 ease-craft group-hover:scale-[1.03]"
-          : ""
-      }`}
+      className="object-cover"
     />
   );
 

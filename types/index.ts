@@ -24,7 +24,6 @@ export type Product = {
   price: number;
   category: ProductCategory;
   images: ProductImage[];
-  featured?: boolean;
   inStock?: boolean;
   spec?: ProductSpec;
 };
@@ -32,8 +31,6 @@ export type Product = {
 export type ProductImage = {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
 };
 
 export type ProductCategory = "carteras" | "cinturones" | "accesorios" | "otros";

@@ -73,9 +73,7 @@ export const en: Dictionary = {
     filter: "Filter by category",
     breadcrumb: "Breadcrumb",
     catalog: "Catalog",
-    pieceNotFound: "Piece not found",
     noteNotFound: "Note not found",
-    otherWays: "Instagram and a visit",
     writeWays: "Ways to write",
     marks: "How it is made",
     footerLine: "Cut, stitched and burnished by hand",
@@ -86,7 +84,6 @@ export const en: Dictionary = {
     emptyCategoryLead:
       "It can be made to order. You can also see the rest of the catalog.",
     viewAllPieces: "See all pieces",
-    seeWorkshop: "See the workshop",
   },
 
   categories: {
@@ -238,7 +235,6 @@ export const en: Dictionary = {
 
   catalog: {
     title: "Pieces",
-    heading: "All pieces",
     description:
       "Bags, belts and small goods cut and stitched by hand in vegetable-tanned leather. Each piece with its sheet: hide, tan, thread, measurements and time on the bench.",
     lead: "Each piece leaves the same bench and carries its sheet: which hide it is, how it was tanned, what thread it is sewn with and how long it takes to make.",

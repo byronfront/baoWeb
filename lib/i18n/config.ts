@@ -8,15 +8,15 @@ export const localeCookie = "bao-locale";
 
 export const localeMeta: Record<
   Locale,
-  { label: string; html: string; og: string; number: string }
+  { label: string; html: string; og: string }
 > = {
-  es: { label: "ES", html: "es", og: "es_CO", number: "es-CO" },
-  en: { label: "EN", html: "en", og: "en_US", number: "en-US" },
-  ru: { label: "RU", html: "ru", og: "ru_RU", number: "ru-RU" },
+  es: { label: "ES", html: "es", og: "es_CO" },
+  en: { label: "EN", html: "en", og: "en_US" },
+  ru: { label: "RU", html: "ru", og: "ru_RU" },
 };
 
 /** English path segments — same for every locale. */
-export const paths = {
+const paths = {
   catalog: "catalog",
   workshop: "workshop",
   contact: "contact",
@@ -57,9 +57,4 @@ export function switchLocalePath(pathname: string, next: Locale): string {
     return parts.join("/") || `/${next}`;
   }
   return `/${next}${pathname === "/" ? "" : pathname}`;
-}
-
-export function localeFromPath(pathname: string): Locale {
-  const first = pathname.split("/")[1];
-  return first && isLocale(first) ? first : defaultLocale;
 }

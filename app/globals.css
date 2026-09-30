@@ -11,15 +11,11 @@
   --ease-craft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-material: cubic-bezier(0.65, 0, 0.35, 1);
 
-  --t-fast: 250ms;
   --t-base: 420ms;
-  --t-slow: 700ms;
   --t-reveal: 1100ms;
 
   --seam: theme(colors.espresso / 14%);
-  --seam-strong: theme(colors.espresso / 28%);
   --seam-invert: theme(colors.chalk.DEFAULT / 16%);
-  --seam-invert-strong: theme(colors.chalk.DEFAULT / 32%);
 
   /* Grano de papel. Se descubre al mirar, no al leer. */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23g)'/%3E%3C/svg%3E");
@@ -139,12 +135,6 @@
   .seam-b {
     border-bottom: 1px solid var(--seam);
   }
-  .seam-l {
-    border-left: 1px solid var(--seam);
-  }
-  .seam-r {
-    border-right: 1px solid var(--seam);
-  }
 
   .on-dark .seam-t,
   .seam-invert.seam-t {
@@ -153,14 +143,6 @@
   .on-dark .seam-b,
   .seam-invert.seam-b {
     border-bottom-color: var(--seam-invert);
-  }
-  .on-dark .seam-l,
-  .seam-invert.seam-l {
-    border-left-color: var(--seam-invert);
-  }
-  .on-dark .seam-r,
-  .seam-invert.seam-r {
-    border-right-color: var(--seam-invert);
   }
 
   .act {
@@ -218,10 +200,6 @@
     @apply font-sans text-label uppercase tracking-[0.28em];
   }
 
-  .balance {
-    text-wrap: balance;
-  }
-
   .pretty {
     text-wrap: pretty;
   }
@@ -229,8 +207,7 @@
 
 @layer utilities {
   .reveal,
-  .reveal-mask,
-  .reveal-line {
+  .reveal-mask {
     transition-delay: var(--reveal-delay, 0ms);
     will-change: transform, opacity, clip-path;
   }
@@ -250,14 +227,6 @@
     transition-timing-function: var(--ease-material);
   }
 
-  .reveal-line {
-    transform: scaleX(0);
-    transform-origin: left;
-    transition-property: transform;
-    transition-duration: var(--t-slow);
-    transition-timing-function: var(--ease-material);
-  }
-
   .is-revealed.reveal,
   .is-revealed .reveal {
     opacity: 1;
@@ -267,11 +236,6 @@
   .is-revealed.reveal-mask,
   .is-revealed .reveal-mask {
     clip-path: inset(0 0 0 0);
-  }
-
-  .is-revealed.reveal-line,
-  .is-revealed .reveal-line {
-    transform: scaleX(1);
   }
 }
 
@@ -290,8 +254,7 @@
   }
 
   .reveal,
-  .reveal-mask,
-  .reveal-line {
+  .reveal-mask {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;

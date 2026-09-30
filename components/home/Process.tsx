@@ -61,7 +61,7 @@ export function Process({ dict }: { dict: Dictionary }) {
       </div>
 
       <div className="shell">
-        <CraftSteps steps={dict.craftSteps} className="mt-24 md:mt-32" columns={3} />
+        <CraftSteps steps={dict.craftSteps} className="mt-24 md:mt-32" />
       </div>
     </section>
   );

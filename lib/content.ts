@@ -3,7 +3,7 @@
  * User-facing copy lives in `lib/i18n`. Photo paths stay here.
  */
 
-export type Photo = { src: string };
+type Photo = { src: string };
 
 export const photo = {
   heroWorkshop: { src: "/images/hero-workshop.jpg" },
@@ -15,7 +15,7 @@ export const photo = {
   patina: { src: "/images/story-patina.jpg" },
 } satisfies Record<string, Photo>;
 
-export type WorkshopNoteMeta = {
+type WorkshopNoteMeta = {
   slug: "el-banco" | "las-herramientas" | "el-tiempo" | "la-patina";
   date: string;
   photo: Photo;

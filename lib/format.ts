@@ -4,13 +4,13 @@ import type { Locale } from "@/lib/i18n/config";
  * Catalog prices are stored in RUB.
  * Rates noted 24 Sep 2026: CBR 1 USD = 84.51 RUB; 1 RUB = 37.24 COP.
  */
-export const rubRates = {
+const rubRates = {
   RUB: 1,
   USD: 1 / 84.51,
   COP: 37.24,
 } as const;
 
-export type DisplayCurrency = keyof typeof rubRates;
+type DisplayCurrency = keyof typeof rubRates;
 
 const money: Record<
   Locale,
@@ -21,7 +21,7 @@ const money: Record<
   ru: { currency: "RUB", number: "ru-RU" },
 };
 
-export function convertFromRub(rub: number, currency: DisplayCurrency): number {
+function convertFromRub(rub: number, currency: DisplayCurrency): number {
   const raw = rub * rubRates[currency];
   if (currency === "COP") return Math.round(raw / 1000) * 1000;
   return Math.round(raw);

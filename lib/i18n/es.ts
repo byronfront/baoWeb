@@ -73,9 +73,7 @@ export const es = {
     filter: "Filtrar por categoría",
     breadcrumb: "Migas de pan",
     catalog: "Catálogo",
-    pieceNotFound: "Pieza no encontrada",
     noteNotFound: "Nota no encontrada",
-    otherWays: "Instagram y una visita",
     writeWays: "Formas de escribir",
     marks: "Características de fabricación",
     footerLine: "Cortado, cosido y bruñido a mano",
@@ -86,7 +84,6 @@ export const es = {
     emptyCategoryLead:
       "Se puede hacer por encargo. También podés ver el resto del catálogo.",
     viewAllPieces: "Ver todas las piezas",
-    seeWorkshop: "Ver el taller",
   },
 
   categories: {
@@ -238,7 +235,6 @@ export const es = {
 
   catalog: {
     title: "Piezas",
-    heading: "Todas las piezas",
     description:
       "Carteras, cinturones y accesorios cortados y cosidos a mano en cuero curtido al vegetal. Cada pieza con su ficha: cuero, curtido, hilo, medidas y tiempo de banco.",
     lead: "Cada pieza sale del mismo banco y lleva su ficha: qué cuero es, cómo se curtió, con qué hilo está cosida y cuánto tarda en hacerse.",
