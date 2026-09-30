@@ -1,43 +1,27 @@
-import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import type { Viewport } from "next";
+import { Cormorant_Garamond, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
+const display = Cormorant_Garamond({
+  subsets: ["latin", "cyrillic"],
   display: "swap",
-  variable: "--font-heading",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
+const sans = IBM_Plex_Sans({
+  subsets: ["latin", "cyrillic"],
   display: "swap",
-  variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  weight: ["400"],
 });
 
 export const viewport: Viewport = {
-  themeColor: "#321f18",
+  themeColor: "#1c1410",
   width: "device-width",
   initialScale: 1,
-};
-
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tudominio.com"),
-  title: {
-    default: "Bao | Artículos de cuero artesanal",
-    template: "%s | Bao Cuero",
-  },
-  description:
-    "Artesanía en cuero. Carteras, cinturones y accesorios hechos a mano en nuestro taller. Calidad y diseño único.",
-  keywords: ["cuero artesanal", "carteras", "cinturones", "marroquineria", "hecho a mano"],
-  openGraph: {
-    type: "website",
-    locale: "es_ES",
-  },
-  robots: "index, follow",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -46,11 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body className="min-h-screen flex flex-col font-sans">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="es" suppressHydrationWarning className={`${display.variable} ${sans.variable}`}>
+      <body className="flex min-h-screen flex-col bg-bone font-sans">
+        {children}
       </body>
     </html>
   );

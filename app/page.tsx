@@ -1,13 +1,6 @@
-import { Hero } from "@/components/home/Hero";
-import { FeaturedProducts } from "@/components/home/FeaturedProducts";
-import { CTA } from "@/components/home/CTA";
+import { redirect } from "next/navigation";
+import { defaultLocale } from "@/lib/i18n";
 
-export default function HomePage() {
-  return (
-    <>
-      <Hero />
-      <FeaturedProducts />
-      <CTA />
-    </>
-  );
+export default function RootPage() {
+  redirect(`/${defaultLocale}`);
 }

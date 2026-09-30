@@ -1,0 +1,17 @@
+---
+description: How to edit products, contact and copy without breaking the catalog
+globs: lib/data.ts,lib/content.ts,lib/format.ts,lib/i18n/**/*.ts,types/index.ts
+alwaysApply: false
+---
+
+# Catalog and copy
+
+- One piece = one object in `products` + two JPGs in `public/images/product-*-01.jpg` and `-02.jpg` + the same slug in `lib/i18n/es.ts`, `en.ts` and `ru.ts`.
+- The `slug` is the URL segment. Do not recycle published slugs. Array order is site order. The first item is the large home piece.
+- `category` only: `carteras` | `cinturones` | `accesorios` | `otros`. A new category = `types/index.ts` and all three dictionaries.
+- `inStock: false` sells it out; do not delete the sheet. `spec` numbers stay in `data.ts`. Spec words are translated in the dictionaries.
+- Workshop photos only through `photo` in `content.ts`. Do not write `/images/...` in JSX.
+- Contact only in `contact`. WhatsApp only with `formatWhatsAppUrl`.
+- `price` is RUB. Currency only in `formatPrice` (ES → COP, EN → USD, RU → RUB). Do not format prices by hand. Rates live in `lib/format.ts` → `rubRates`.
+- Do not add a cart, live stock or fetch. The catalog is static: a new product appears on the next build.
+- Routes are English (`/catalog`, `/workshop`, `/contact`) and prefixed by locale (`/es`, `/en`, `/ru`).

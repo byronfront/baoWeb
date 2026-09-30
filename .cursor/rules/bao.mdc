@@ -1,0 +1,35 @@
+---
+description: Bao guardrails — do not restyle, do not break the workshop
+alwaysApply: true
+---
+
+# Bao — how to work on this site
+
+Read `MAINTENANCE.md` before changing code if the change is not obvious.
+
+This site is an editorial workshop catalog, not an ecommerce. Commissions go through WhatsApp and email. There is no cart, checkout, auth, CMS or API.
+
+## Attitude
+
+- The smallest change that answers the request. Do not “take the chance” to redesign.
+- If the user did not ask for a restyle, do not restyle.
+- Keep routes, filters, contextual WhatsApp, product sheets, `inStock` and the narrative.
+- When in doubt, do not invent sections, tokens or components.
+
+## Forbidden
+
+- Floating cards, shadows, glassmorphism, digital gradients, rounded-full
+- WhatsApp green, pure white, pure black, shiny gold
+- Blackletter, Inter, Poppins, Playfair, decorative icons
+- Flags, folklore, medieval clichés or marketing “premium”
+- Hardcoding prices, phones, photo paths or brand copy inside a component
+
+## Where to edit
+
+- Catalog and contact → `lib/data.ts`
+- Photo paths and note slugs → `lib/content.ts`
+- User-facing copy (ES / EN / RU) → `lib/i18n/es.ts`, `en.ts`, `ru.ts`
+- Tokens → `tailwind.config.ts` (no loose hex)
+- Ornament → only `components/brand/Ornament.tsx`
+
+Concrete copy (“cut by hand”), never “quality and passion”.

@@ -1,0 +1,80 @@
+import Link from "next/link";
+import { products } from "@/lib/data";
+import {
+  catalogHref,
+  fill,
+  localizeProduct,
+  type Dictionary,
+  type Locale,
+} from "@/lib/i18n";
+import { Ledger } from "@/components/catalog/Ledger";
+import { ProductTile } from "@/components/ui/ProductTile";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+
+export function Banco({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const localized = products.map((product) => localizeProduct(product, dict));
+  const [featured, ...rest] = localized;
+  if (!featured) return null;
+
+  return (
+    <section className="surface-paper bg-bone py-section text-ink">
+      <div className="shell">
+        <header className="grid gap-y-8 md:grid-cols-12 md:gap-x-10">
+          <div className="md:col-span-7">
+            <SectionLabel index="01" className="text-ink-faint">
+              {dict.banco.label}
+            </SectionLabel>
+            <h2 className="mt-6 max-w-[13ch] font-display text-d3 font-light">
+              {dict.banco.title}
+            </h2>
+          </div>
+
+          <div className="flex flex-col justify-end md:col-span-4 md:col-start-9">
+            <p className="text-lead text-ink-muted pretty">
+              {fill(dict.banco.lead, { n: products.length })}
+            </p>
+            <Link href={catalogHref(locale)} className="act-quiet mt-6 self-start">
+              {dict.ui.viewCatalog}
+            </Link>
+          </div>
+        </header>
+
+        <div className="mt-20 grid items-start gap-x-12 gap-y-16 md:mt-28 md:grid-cols-12">
+          <ProductTile
+            product={featured}
+            locale={locale}
+            index="01"
+            ratio="plate"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            className="md:col-span-7"
+          />
+
+          <div className="md:col-span-4 md:col-start-9 md:pt-4">
+            <p className="text-label uppercase text-ink-faint">{dict.ui.inventory}</p>
+            <Ledger products={localized} locale={locale} className="mt-6" />
+          </div>
+        </div>
+
+        {rest.length >= 2 && (
+          <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:mt-24">
+            <ProductTile
+              product={rest[0]}
+              locale={locale}
+              index="02"
+              ratio="object"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            <ProductTile
+              product={rest[1]}
+              locale={locale}
+              index="03"
+              ratio="object"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
