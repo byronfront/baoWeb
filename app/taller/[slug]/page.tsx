@@ -9,5 +9,5 @@ export function generateStaticParams() {
 
 export default async function LegacyNote({ params }: Props) {
   const { slug } = await params;
-  redirect(`/es/workshop/${slug}`);
+  redirect(`/es/workshop/${slug}/`);
 }

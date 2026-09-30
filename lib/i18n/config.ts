@@ -27,8 +27,8 @@ export function isLocale(value: string): value is Locale {
 }
 
 export function href(locale: Locale, path = ""): string {
-  const clean = path.replace(/^\/+/, "");
-  return clean ? `/${locale}/${clean}` : `/${locale}`;
+  const clean = path.replace(/^\/+|\/+$/g, "");
+  return clean ? `/${locale}/${clean}/` : `/${locale}/`;
 }
 
 export function catalogHref(locale: Locale, slug?: string, category?: string): string {
@@ -51,10 +51,11 @@ export function contactHref(locale: Locale, hash?: "encargo" | "escribir"): stri
 }
 
 export function switchLocalePath(pathname: string, next: Locale): string {
-  const parts = pathname.split("/");
-  if (parts[1] && isLocale(parts[1])) {
-    parts[1] = next;
-    return parts.join("/") || `/${next}`;
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts[0] && isLocale(parts[0])) {
+    parts[0] = next;
+    return `/${parts.join("/")}/`;
   }
-  return `/${next}${pathname === "/" ? "" : pathname}`;
+  const rest = parts.join("/");
+  return rest ? `/${next}/${rest}/` : `/${next}/`;
 }

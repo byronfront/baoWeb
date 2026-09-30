@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function LegacyCatalog() {
-  redirect("/es/catalog");
+  redirect("/es/catalog/");
 }

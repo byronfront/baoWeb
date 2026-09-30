@@ -9,5 +9,5 @@ export function generateStaticParams() {
 
 export default async function LegacyProduct({ params }: Props) {
   const { slug } = await params;
-  redirect(`/es/catalog/${slug}`);
+  redirect(`/es/catalog/${slug}/`);
 }
