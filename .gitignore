@@ -9,7 +9,7 @@
 
 # next.js
 /.next/
-/out/
+# `out/` is tracked so Hostinger Git can publish the static site.
 
 # production
 /build
